@@ -14,7 +14,7 @@ span {
 	}
 }
 .title-wrapper {
-	background-image: url(assets/images/desk-2.jpg);
+	background-image: url(../../public/assets/images/desk-2.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -103,7 +103,7 @@ span {
     background-color: rgb(192, 192, 192);
     border: 2px solid rgb(41, 0, 221);
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .top_bar .bar_click {
     border-left: 1px solid rgb(41, 0, 221);
