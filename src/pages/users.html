@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel = "stylesheet" href = "../public/CSS/users.css">
+	
+	<!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/1a649ecc9b.js" crossorigin="anonymous"></script>
+
+	<!--Google Fonts-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+
+	<title>User Login</title>
+</head>
+<body>
+	<div class="wrapper">
+		<a id="admin">
+			<div class="user_panel">
+				<div class="wrapper">
+					<div class="photo"><i class="far fa-user"></i></div>
+					<div class="title">Admin</div>
+				</div>
+			</div>
+		</a>
+		<a id="allUsers" href="#">
+			<div class="user_panel">
+				<div class="wrapper">
+					<div class="photo"><i class="far fa-user"></i></div>
+					<div class="title">Everyone else</div>
+				</div>
+			</div>
+		</a>
+		<form class="input">
+			<input type="password" id="pw" placeholder="Password">
+			<input type="submit" value="->">
+		</form>
+	</div>
+	<script src="users.js"></script>
+</body>
+</html>

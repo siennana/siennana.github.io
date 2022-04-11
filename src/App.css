@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+html {
+	scroll-behavior: smooth;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+	font-family: 'Source Code Pro', monospace;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+span {
+	border-right: .05em solid;
+	animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+	50% {
+		border-color: transparent;
+	}
+}
+.title-wrapper {
+	background-image: url(assets/images/desk-2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 100vw;
+	height: 110vh;
+	animation: gradient 15s ease infinite;
+} 
+.main-content {
+	position: relative;
+	color: rgb(255, 255, 255);
+	height: 20rem;
+	width: 40rem;
+	left: 50%;
+	top: 35%;
+	transform: translate(-60%, -50%);
+	text-align: center;
+	border-radius: 3px;
+	align-items: center;
+	justify-content: center;
+}
+.name-title {
+	font-size: 4em;
+	display: flex;
+	justify-content: center;
+}
+.name-title .last {
+	color:rgb(255, 0, 212);
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.name-title .icon:hover {
+	transform: translateY(-5px);
+}
+.main-content h1 {
+	font-size: 1.5em;
+}
+.description {
+	font-size: 1em;
+}
+.wrapper {
+	left: 50%;
+}
+.wrapper i {
+  padding: 10px;
+  transition: all ease-in-out 100ms;
+}
+.button-wrapper {
+	margin-top: 50px;
+}
+.button-wrapper a {
+	text-decoration: none;
+	position: relative;
+}
+.button {
+	padding: 10px 10px 10px 10px;
+	transition: all ease-in-out 100ms;
+	color: white;
+	border-radius: 5px;
+	background-color: #0063c72f;
+	width: 5rem;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+.button:hover {
+	background-color: #7500c4;
+	cursor: pointer;
+}
+.button a {
+	color: white;
+	letter-spacing: 3px;
+	text-decoration: none;
+}
+.panel {
+    position: absolute;
+    background-color: rgb(255, 240, 240);
+    width: 20rem;
+    height: 20rem;
+    border: 2px solid rgb(0, 28, 153);
+    overflow: auto;
+	box-shadow: 8px 10px 10px 10px rgba(0, 0, 0, 0.63);
+}
+/* Popup panel ------------------------------------------------------------------- */
+.panel .top_bar {
+    height: 25px;
+    background-color: rgb(192, 192, 192);
+    border: 2px solid rgb(41, 0, 221);
+    display: flex;
+    justify-content: end;
+}
+.top_bar .bar_click {
+    border-left: 1px solid rgb(41, 0, 221);
+    width: 30px;
+    text-align: center;
+    padding-top: 5px;
+}
+.top_bar .bar_click:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+}
+.panel .content {
+    color: rgb(44, 44, 44);
+    padding-left: 10px;
+    width: 80%;
+}
+.panel-music {
+	top: 5%;
+	left: 70%;
+	visibility: hidden;
+}
+@media only screen and (max-width: 1100px) {
+	.main-content {
+	  height: 60%;
+	  width: 60%;
+	}
+	.name-title {
+		display: block;
+	}
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 600px) {
+	.main-content {
+	  height: 75%;
+	  width: 75%;
+	}
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
