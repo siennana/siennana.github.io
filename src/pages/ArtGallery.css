@@ -1,0 +1,9 @@
+.art-gallery {
+    display: flex;
+}
+
+.art-gallery img {
+    height: 10rem;
+    width: 10rem;
+    flex-wrap: wrap;
+}
