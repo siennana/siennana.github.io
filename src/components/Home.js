@@ -12,7 +12,6 @@ function Home() {
                   </div>
                   <div className="typewriter"><h1>Blah</h1></div>
                   <div className="button-wrapper">
-                      
                   </div>
               </div>
           </div>

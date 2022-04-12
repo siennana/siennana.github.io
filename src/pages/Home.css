@@ -88,43 +88,6 @@ span {
 	letter-spacing: 3px;
 	text-decoration: none;
 }
-.panel {
-    position: absolute;
-    background-color: rgb(255, 240, 240);
-    width: 20rem;
-    height: 20rem;
-    border: 2px solid rgb(0, 28, 153);
-    overflow: auto;
-	box-shadow: 8px 10px 10px 10px rgba(0, 0, 0, 0.63);
-}
-/* Popup panel ------------------------------------------------------------------- */
-.panel .top_bar {
-    height: 25px;
-    background-color: rgb(192, 192, 192);
-    border: 2px solid rgb(41, 0, 221);
-    display: flex;
-    justify-content: flex-end;
-}
-.top_bar .bar_click {
-    border-left: 1px solid rgb(41, 0, 221);
-    width: 30px;
-    text-align: center;
-    padding-top: 5px;
-}
-.top_bar .bar_click:hover {
-    background-color: greenyellow;
-    cursor: pointer;
-}
-.panel .content {
-    color: rgb(44, 44, 44);
-    padding-left: 10px;
-    width: 80%;
-}
-.panel-music {
-	top: 5%;
-	left: 70%;
-	visibility: hidden;
-}
 @media only screen and (max-width: 1100px) {
 	.main-content {
 	  height: 60%;
