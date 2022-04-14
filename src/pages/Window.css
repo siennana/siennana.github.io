@@ -1,32 +1,34 @@
 .panel {
     position: absolute;
-    border-radius: 2px;
+    border-radius: 3px;
     border: 3px solid #030921;
-    background-color: #e9ebf5;
+    background-color: #f1f2fa;
     color: rgb(27, 27, 27);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 75%;
     width: 75%;
+    box-shadow: 8px 10px 3px rgba(0, 0, 0, 0.7);
 }
 .panel .top_bar {
-    height: 25px;
+    height: 30px;
     width: 100%;
-    border-radius: 2px 2px 0 0;
-    background-color: #c0c7db;
+    border-radius: 3px 3px 0 0;
+    background-color: #f1f2fa;
     color: black;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     cursor: move;
+    border-bottom: 3px solid #030921;
 }
 .top_bar .descriptor {
-    margin-left: 5px;
+    margin-left: 0.75rem;
 }
 .top_bar .buttons {
     display: flex;
-    align-items: center;
-    margin-right: 5px;
+    margin-right: 0.75rem;
 }
 .top_bar .bar_click {
     width: 12px;
@@ -38,7 +40,7 @@
 }
 .panel .content {
     position: relative;
-    height: calc(100% - 25px);
+    height: calc(100% - 35px);
     overflow-y: auto;
 }
 .top_bar #minimize {

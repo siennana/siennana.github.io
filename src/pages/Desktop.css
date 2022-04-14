@@ -3,12 +3,22 @@ body {
     padding: 0;
 }
 body {
-    background-color: rgb(150, 211, 198);
-    background-size: cover;
-	background-position: top;
-    background-repeat: no-repeat;
+    background: linear-gradient(-45deg, #52eec7, #93f5bc, #7fd2f0, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
     font-family: "Gloria Hallelujah", cursive;
     image-rendering: -webkit-optimize-contrast;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 .desktop-icons {
     width: 40px;
@@ -97,16 +107,17 @@ body {
 /*Bottom Bar*************************************************************/
 .bottom-bar {
     position: fixed;
-    background-color: rgb(189, 198, 243);
+    background-color: rgb(212, 217, 247);
     bottom: 20px;
     left: 30%;
     width: 40%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 8px;
-    border: 3px solid black;
-    border-radius: 10px;
+    padding: 5px;
+    border: 3px solid #030921;
+    border-radius: 20px;
+    box-shadow: 8px 10px 3px rgba(0, 0, 0, 0.7);
 }
 .bottom-bar img {
     width: 40px;
@@ -122,21 +133,6 @@ body {
 }
 .link-wrapper img {
     transition: all ease-in-out 100ms;
-}
-.link-wrapper a:nth-child(1) {
-    color: #f53f3f; 
-}
-.link-wrapper a:nth-child(2) {
-    color: #2f88e0;
-}
-.link-wrapper a:nth-child(3) {
-    color: #b728db;
-}
-.link-wrapper a:nth-child(4) {
-    color: #f8f682;
-}
-.link-wrapper a:nth-child(5) {
-    color: #00b161;
 }
 .link-wrapper img:hover {
     transform: translateY(-5px);
