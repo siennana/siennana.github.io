@@ -1,9 +1,9 @@
 .art-gallery {
-    display: flex;
+  display: flex;
 }
 
 .art-gallery img {
-    height: 10rem;
-    width: 10rem;
-    flex-wrap: wrap;
+  height: 10rem;
+  width: 10rem;
+  flex-wrap: wrap;
 }

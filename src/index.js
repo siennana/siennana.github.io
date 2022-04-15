@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './components/Home';
-import Users from './components/Users';
 import Desktop from './components/Desktop'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -11,7 +10,6 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/home" element={<Home />} />
-      <Route path="/users" element={<Users />} />
       <Route path="/" element={<Desktop />} />
     </Routes>
   </Router>,

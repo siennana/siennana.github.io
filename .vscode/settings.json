@@ -1,0 +1,15 @@
+{
+    "editor.formatOnType": false,
+    "[html]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+    },
+    "[javascript]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+}
