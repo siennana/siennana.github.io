@@ -4,10 +4,20 @@ import PortfolioItem from './PortfolioItem';
 function Portfolio() {
   return (
     <div className='projects-wrapper'>
+      <div className='portfolio-skills'>
+        <img src='/assets/images/icons/64px-JavaScript-logo.png'/>
+        <img src='/assets/images/icons/html-5.png'/>
+        <img src='/assets/images/icons/css-3.png'/>
+        <img src='/assets/images/icons/node-js.png'/>
+        <img src='/assets/images/icons/react.png'/>
+        <img src='/assets/images/icons/c_plus_plus.png'/>
+        <img src='/assets/images/icons/c_sharp.png'/>
+        <img src='/assets/images/icons/python.png'/>
+      </div>
       <h1 className='portfolio-header'>Hey, I'm Sienna</h1>
       <p className="portfolio-about">I'm a software engineer who likes to make websites and games and stuff in my free time. I like simple, clean, sensible user interfaces. If you're a small business or just a person who needs a website, reach out and I'll see what I can do!</p>
       <ul className="portfolio-links">
-        <li><a href='#'>Download my Resume</a></li>
+        <li><a href='#'>Check out my Resume</a></li>
         <li><a href='#'>Send me an email</a></li>
       </ul>
       <ul>

@@ -19,6 +19,9 @@ body {
 		background-position: 0% 50%;
 	}
 }
+h1 {
+  margin: 0;
+}
 .desktop-icons {
   width: 40px;
   display: flex;

@@ -3,8 +3,16 @@
     max-width: 80%;
     margin: auto;
 }
+.portfolio-skills {
+    display: flex;
+}
+.portfolio-skills img {
+    width: 2rem;
+    margin: 3rem 2rem 1rem 0;
+}
 .portfolio-header {
     font-size: 3rem;
+    margin: 1rem 0 0 0;
 }
 .portfolio-about {
     font-size: 1.5rem;
