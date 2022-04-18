@@ -1,12 +1,13 @@
 import '../pages/Desktop.css';
 import Window from './desktop/Window'
-import Portfolio from './desktop/Portfolio';
-import ArtGallery from './desktop/ArtGallery'
+import Portfolio from './desktop/portfolio/Portfolio';
+import ArtGallery from './desktop/art/ArtGallery'
 
 function Desktop() {
 	return (
 		<div>
 			<Window content={<Portfolio/ >} descriptor='Portfolio'/>
+			<Window content={<ArtGallery/ >} descriptor='Art'/>
 
 			<div className="desktop-icons">
 				<div className="art-button icon">

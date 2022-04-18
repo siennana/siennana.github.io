@@ -1,4 +1,4 @@
-import '../../pages/Portfolio.css';
+import '../../../pages/Portfolio.css';
 import PortfolioItem from './PortfolioItem';
 
 function Portfolio() {

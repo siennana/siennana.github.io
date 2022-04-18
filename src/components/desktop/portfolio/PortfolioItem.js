@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../pages/PortfolioItem.css';
+import '../../../pages/PortfolioItem.css';
 
 export default class PortfolioItem extends Component {
   constructor(props) {
