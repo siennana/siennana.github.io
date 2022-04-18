@@ -1,13 +1,25 @@
 import '../pages/Desktop.css';
 import Window from './desktop/Window'
+import Tab from './widgets/Tab';
 import Portfolio from './desktop/portfolio/Portfolio';
 import ArtGallery from './desktop/art/ArtGallery'
+
+const tabDisplay = {
+	display: 'flex',
+	position: 'absolute',
+	top: '0',
+	left: '8rem'
+}
 
 function Desktop() {
 	return (
 		<div>
 			<Window content={<Portfolio/ >} descriptor='Portfolio'/>
-			<Window content={<ArtGallery/ >} descriptor='Art'/>
+
+			<div style={tabDisplay}>
+				<Tab display={'Portfolio'}></Tab>
+				<Tab display={'Art Gallery'}></Tab>
+			</div>
 
 			<div className="desktop-icons">
 				<div className="art-button icon">
