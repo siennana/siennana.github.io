@@ -3,7 +3,7 @@
   border: 3px solid black;
   box-shadow: 5px 8px 3px rgba(0, 0, 0, 0.75);
   margin: 2rem 0.5rem 1rem 0;
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   transition: transform 100ms, box-shadow 100ms;
 }
 .portfolioItem-wrapper:hover {
@@ -13,4 +13,8 @@
 }
 .portfolioItem-header {
   font-size: 2.5rem;
+  margin: 0;
+}
+.portfolioItem-date {
+  font-size: 14px;
 }

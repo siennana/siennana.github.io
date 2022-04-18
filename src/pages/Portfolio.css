@@ -2,6 +2,7 @@
     width: 1300px;
     max-width: 80%;
     margin: auto;
+    font-size: 16px;
 }
 .portfolio-skills {
     display: flex;
@@ -15,8 +16,9 @@
     margin: 1rem 0 0 0;
 }
 .portfolio-about {
-    font-size: 1.5rem;
-    line-height: 2.5rem;
+    font-weight: 600;
+    line-height: 2rem;
+    font-size: 20px;
 }
 .projects-wrapper ul {
     list-style-type: none;

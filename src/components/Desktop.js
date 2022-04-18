@@ -6,7 +6,7 @@ import ArtGallery from './desktop/ArtGallery'
 function Desktop() {
 	return (
 		<div>
-			<Window content={<Portfolio/ >}/>
+			<Window content={<Portfolio/ >} descriptor='Portfolio'/>
 
 			<div className="desktop-icons">
 				<div className="art-button icon">
