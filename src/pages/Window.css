@@ -43,12 +43,12 @@
   height: calc(100% - 35px);
   overflow-y: auto;
 }
-.top_bar #minimize {
+.top_bar .min {
   background-color: rgb(159, 255, 196);
 }
-.top_bar #maximize {
+.top_bar .max {
   background-color: rgb(236, 234, 193);
 }
-.top_bar #close {
+.top_bar .exit {
   background-color: rgb(255, 121, 121);
 }
