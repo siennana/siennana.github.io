@@ -16,41 +16,51 @@ const tabDisplay = {
 export default class Desktop extends Component {
 	constructor() {
 		super();
-		this.open_window_stack = [];
 		this.min_stack = [];
+		this.showPortfolio = false;
 		this.state = {
-			showPortfolio: true,
+			open_window_stack: [],
 			showGallery: false,
-			showMusic: false
+			showMusic: false,
+			showTerminal: false
 		}
 	}
 
-	closePortfolio = () => {
-		this.setState({showPortfolio: false});
-	}
-	closeGallery = () => {
-		this.setState({showGallery: false});
-	}
-	closeMusic = () => {
-		this.setState({showMusic: false});
+	removeFromStack = () => {
+		var copy = [...this.state.open_window_stack];
+		const index = this.state.open_window_stack.findIndex(obj => {
+			return obj.key === 'Portfolio';
+		});
+		copy.splice(index, 1);
+		this.setState({open_window_stack: copy});
+		console.log('removed');
 	}
 
-	openPortfolio = () => {
-		this.setState({showPortfolio: true});
+	addToStack = (key, content) => {
+		const index = this.state.open_window_stack.findIndex(obj => {
+			return obj.key === key;
+		});
+		if (index >= 0) { return }
+		const item = {
+			content: content,
+			close: this.removeFromStack,
+			description: key,
+			key: key
+		};
+		this.setState({open_window_stack: [...this.state.open_window_stack, item]});
+		console.log('added');
 	}
-	openGallery = () => {
-		this.setState({showGallery: true});
-	}
-	openMusic = () => {
-		this.setState({showMusic: true});
+
+	renderOpenWindows = () => {
+		return this.state.open_window_stack.map((item) => (
+			<Window key={item.key} content={item.content} descriptor={item.description} closewindow={item.close}/>
+		));
 	}
 
 	render() {
 		return (
 			<div>
-				{this.state.showPortfolio ? <Window content={<Portfolio/ >} descriptor='Portfolio' closewindow={this.closePortfolio}/> : ''}
-				{this.state.showGallery ? <Window content={<ArtGallery/ >} descriptor='Art Gallery' closewindow={this.closeGallery}/> : ''}
-				{this.state.showMusic ? <Window content={<MusicPlayer/ >} descriptor='Music Player' closewindow={this.closeMusic}/> : ''}
+				{this.renderOpenWindows()}
 
 				<div style={tabDisplay}>
 					<Tab display={'Portfolio'}></Tab>
@@ -58,7 +68,7 @@ export default class Desktop extends Component {
 				</div>
 	
 				<div className="desktop-icons">
-					<div className="art-button icon" onClick={this.openGallery}>
+					<div className="art-button icon">
 						<img src="/assets/images/icons/open-book.png"/>
 						<div className="icon-text">sketchbook</div>
 					</div>
@@ -66,11 +76,12 @@ export default class Desktop extends Component {
 						<img src="/assets/images/icons/terminal-sketchy.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
-					<div className="projects-button icon" onClick={this.openPortfolio}>
+					<div className="projects-button icon" onClick={() => 
+						this.addToStack('Portfolio', <Portfolio/>)}>
 						<img src="/assets/images/icons/development-sketchy.png"/>
 						<div className="icon-text">projects</div>
 					</div>
-					<div className="music-button icon" onClick={this.openMusic}>
+					<div className="music-button icon">
 						<img src="/assets/images/icons/turntable-sketchy.png"/>
 						<div className="icon-text">music player</div>
 					</div>
