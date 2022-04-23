@@ -15,7 +15,7 @@ export default class Tab extends Component {
   }
   render() {
     return (
-      <div style={tabStyle}>{this.props.display}</div>
+      <div onClick={this.props.unMinimize} style={tabStyle}>{this.props.display}</div>
     );
   }
 }

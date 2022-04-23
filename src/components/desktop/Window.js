@@ -5,28 +5,26 @@ import '../../pages/Window.css';
 export default class Window extends Component {
   constructor(props) {
     super(props);
-    this.id = 1;
     this.state = {
-      closed: false,
-      minimized: false,
-      maximized: false,
       parentSize: {
-        height: 100,
-        width: 100
+        height: this.props.height,
+        width: this.props.width
       }
     }
   }
 
   render() {
     return (
-      <div className="panel">
+      <div className="panel" style={this.state.parentSize}>
         <div className="top_bar">
+          <div className="top line"></div>
           <div className="descriptor">{this.props.descriptor}</div>
           <div className="buttons">
-            <div className="min bar_click"></div>
+            <div className="min bar_click" onClick={this.props.minimize}></div>
             <div className="max bar_click"></div>
-            <div className="exit bar_click" onClick={this.props.closewindow}></div>
+            <div className="exit bar_click" onClick={this.props.close}></div>
           </div>
+          <div className="bottom line"></div>
         </div>
         <div className="content">
           {this.props.content}
