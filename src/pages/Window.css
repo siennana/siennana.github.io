@@ -1,72 +1,48 @@
 .panel {
   position: absolute;
   border-radius: 3px;
-  border: 3px solid #030921;
-  background-color: #f1f2fa;
-  color: rgb(27, 27, 27);
+  border: 3px solid blue;
   top: 4rem;
-  left: 8rem;
-  box-shadow: 8px 10px 3px rgba(0, 0, 0, 0.7);
+  left: 12rem;
+  box-shadow: 10px 10px 1px rgba(0, 0, 0, 0.5);
+  background-color: aliceblue;
 }
 .panel .top_bar {
-  height: 30px;
+  height: 1.5rem;
   width: 100%;
   border-radius: 3px 3px 0 0;
-  background-color: #f1f2fa;
-  color: black;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   cursor: move;
-  border-bottom: 3px solid #030921;
+  border-bottom: 3px solid blue;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
 }
 .top_bar .descriptor {
-  margin-left: 0.75rem;
+  margin-left: 0.5rem;
 }
 .top_bar .buttons {
   display: flex;
-  margin-right: 0.75rem;
 }
-.top_bar line {
-  position: absolute;
-  width: calc(100% - 10px);
-  height: 2px;
-  background-color: black;
-}
-.top_bar .top {
-  position: absolute;
-  top: 4px;
-  right: 0;
-  width: calc(100% - 10px);
-  height: 2px;
-  background-color: black;
-}
-.top_bar .bottom {
-  position: absolute;
-  top: 24px;
-  width: calc(100% - 10px);
-  height: 2px;
-  background-color: black;
-}
-.top_bar .bar_click {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-left: 5px;
+.top_bar .window-button {
   cursor: pointer;
-  border: 1px solid black;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-left: 3px solid blue;
+}
+.top_bar .window-button img {
+  height: 1rem;
+  padding: 4px;
 }
 .panel .content {
   position: relative;
-  height: calc(100% - 35px);
+  height: calc(100% - 3.4rem);
   overflow-y: auto;
 }
-.top_bar .min {
-  background-color: rgb(159, 255, 196);
-}
-.top_bar .max {
-  background-color: rgb(236, 234, 193);
-}
-.top_bar .exit {
-  background-color: rgb(255, 121, 121);
+.panel-bottom-bar {
+  height: 1.5rem;
+  width: 100%;
+  border: 3px solid blue;
+  border-left: transparent;
+  background-color: rgb(255, 255, 255);
 }

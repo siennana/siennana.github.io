@@ -17,18 +17,20 @@ export default class Window extends Component {
     return (
       <div className="panel" style={this.state.parentSize}>
         <div className="top_bar">
-          <div className="top line"></div>
           <div className="descriptor">{this.props.descriptor}</div>
           <div className="buttons">
-            <div className="min bar_click" onClick={this.props.minimize}></div>
-            <div className="max bar_click"></div>
-            <div className="exit bar_click" onClick={this.props.close}></div>
+            <div className="window-button" onClick={this.props.minimize}>
+              <img src="/assets/images/icons/minus.png"/>
+            </div>
+            <div className="window-button" onClick={this.props.close}>
+              <img src="/assets/images/icons/close.png"/>
+            </div>
           </div>
-          <div className="bottom line"></div>
         </div>
         <div className="content">
           {this.props.content}
         </div>
+        <div className='panel-bottom-bar'></div>
       </div>
     );
   }

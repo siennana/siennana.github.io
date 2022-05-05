@@ -13,22 +13,29 @@ const tabDisplay = {
 	left: '8rem'
 }
 const portfolio = {
-	key: 'Portfolio',
+	key: 'PORTFOLIO',
 	content: <Portfolio/>,
 	init: {
 		height: '50rem',
-		width: '50rem',
+		width: '60rem',
 	}
 }
 const music = {
-	key: 'Music Player',
+	key: 'MUSIC PLAYER',
 	content: <MusicPlayer/>,
 	init: {
 		height: '20rem',
 		width: '40rem',
 	}
 }
-
+const art = {
+	key: 'ART',
+	content: <ArtGallery/>,
+	init: {
+		height: '50rem',
+		width: '60rem',
+	}
+}
 const terminal = {
 	key: 'Command Line',
 	content: <MusicPlayer/>,
@@ -93,7 +100,7 @@ export default class Desktop extends Component {
 			width: app.init.width,
 			close: () => this.removeFromOpenStack(app),
 			minimize: () => this.addToMinStack(app),
-			description: app.key,
+			descriptor: app.key,
 			key: app.key
 		};
 		this.setState({open_window_stack: [...this.state.open_window_stack, item]});
@@ -107,7 +114,7 @@ export default class Desktop extends Component {
 
 	renderMinimizedTabs = () => {
 		return this.state.min_stack.map((item) => (
-			<Tab display={item.display} unMinimize={item.unMinimize}/>
+			<Tab {...item}/>
 		));
 	}
 
@@ -121,23 +128,28 @@ export default class Desktop extends Component {
 				{this.renderOpenWindows()}
 	
 				<div className="desktop-icons">
-					<div className="terminal-button icon">
-						<img src="/assets/images/icons/terminal-sketchy.png"/>
+					<div className="icon" onClick={() => 
+						this.addToOpenStack(art)}>
+						<img src="/assets/images/icons/journal.png"/>
+						<div className="icon-text">art</div>
+					</div>
+					<div className="icon">
+						<img src="/assets/images/icons/terminal.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
-					<div className="projects-button icon" onClick={() => 
+					<div className="icon" onClick={() => 
 						this.addToOpenStack(portfolio)}>
-						<img src="/assets/images/icons/development-sketchy.png"/>
+						<img src="/assets/images/icons/resume-and-cv.png"/>
 						<div className="icon-text">projects</div>
 					</div>
-					<div className="music-button icon" onClick={() => 
+					<div className="icon" onClick={() => 
 						this.addToOpenStack(music)}>
-						<img src="/assets/images/icons/turntable-sketchy.png"/>
-						<div className="icon-text">music player</div>
+						<img src="/assets/images/icons/vinyl-record-player.png"/>
+						<div className="icon-text">music</div>
 					</div>
 				</div>
 	
-				<div className="bottom-bar">
+				<div className="desktop-bottom-bar">
 					<div className="link-wrapper">
 							<a href="http://github.com/siennana" target = "_blank"><img src="/assets/images/icons/github-sketchy.png"/></a>
 							<a href="http://www.linkedin.com/in/siennab" target = "_blank"><img src="./assets/images/icons/linkedin-sketchy.png"/></a>

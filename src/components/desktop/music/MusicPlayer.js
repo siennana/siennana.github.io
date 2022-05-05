@@ -18,7 +18,7 @@ export default class MusicPlayer extends Component {
 
   render() {
     return (
-      <div>Music Player</div>
+      <div>Music Player Coming Soon</div>
     );
   }
 }
