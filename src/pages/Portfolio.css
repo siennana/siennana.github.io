@@ -1,49 +1,49 @@
 .projects-wrapper {
-    margin: auto;
-    padding: 2rem;
-    color: blue;
-    background-color: aliceblue;
+  margin: auto;
+  padding: 2rem;
+  color: blue;
+  background-color: aliceblue;
 }
 .portfolio-title-wrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .portfolio-skills img {
-    width: 2rem;
-    margin: 3rem 2rem 1rem 0;
+  width: 2rem;
+  margin: 3rem 2rem 1rem 0;
 }
 .portfolio-header {
-    font-size: 3rem;
-    margin: 0 2rem 0 0;
+  font-size: 3rem;
+  margin: 0 2rem 0 0;
 }
 .projects-wrapper ul {
-    list-style-type: none;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 .portfolio-links li {
-    float: left;
-    margin-right: 1rem;
+  float: left;
+  margin-right: 1rem;
 }
 .portfolio-links a {
-    display: block;
-    text-decoration: none;
-    color: blue;
-    border-radius: 5px;
-    border: 3px solid blue;
-    box-shadow: 8px 8px 1px blue;
-    margin: 2rem 0.5rem 1rem 0;
-    padding: 0.5rem;
-    transition: transform 100ms, box-shadow 100ms;
+  display: block;
+  text-decoration: none;
+  color: blue;
+  border-radius: 5px;
+  border: 3px solid blue;
+  box-shadow: 8px 8px 1px blue;
+  margin: 2rem 0.5rem 1rem 0;
+  padding: 0.5rem;
+  transition: transform 100ms, box-shadow 100ms;
 }
 .portfolio-links a:hover {
-    cursor: pointer;
-    transform: translateX(5px) translateY(8px);
-    box-shadow: 1px 1px 1px blue;
-  }
-  .portfolio-items-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      border: 3px solid blue;
-  }
+  cursor: pointer;
+  transform: translateX(5px) translateY(8px);
+  box-shadow: 1px 1px 1px blue;
+}
+.portfolio-items-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  border: 3px solid blue;
+}
