@@ -1,4 +1,4 @@
-import { post } from 'axios';
+import { post , get} from 'axios';
 import { stringify } from 'qs';
 import { Buffer } from 'buffer';
 
@@ -9,8 +9,6 @@ const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toStrin
 
 export const getSpotifyAuth = async () => {
   try{
-    console.log(client_id);
-    console.log(client_secret);
     console.log(process.env);
     //make post request to SPOTIFY API for access token, sending relavent info
     const token_url = 'https://accounts.spotify.com/api/token';
@@ -21,12 +19,34 @@ export const getSpotifyAuth = async () => {
         'Authorization': `Basic ${auth_token}`,
         'Content-Type': 'application/x-www-form-urlencoded' 
       }
-    })
+    });
     //return access token
-    console.log(response.data.access_token);
     return response.data.access_token;   
   }catch(error){
     //on fail, log the error in console
     console.log(error);
   }
 }
+
+const playlist_id = '6Y3I7PHLAA3ExXzJdBh8rL';
+
+export const getPlaylist = async () => {
+  try {
+    const auth_token = await getSpotifyAuth();
+    //get request to SPOTIFY API to access playlist
+    const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/?limit=10`;
+
+    const response = await get(playlist_url, {
+      headers: { 
+        'Authorization': `Bearer ${auth_token}`,
+        'Accept': 'application/json' 
+      }
+    });
+    //return playlist
+    console.log(response.data.tracks);
+    return response.data;
+  }catch(error){
+    //on fail, log the error in console
+    console.log(error);
+  }
+};
