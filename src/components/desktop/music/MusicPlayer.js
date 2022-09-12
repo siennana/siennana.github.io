@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../../pages/MusicPlayer.css'
+import { getSpotifyAuth } from '../../../api/spotify';
 
 export default class MusicPlayer extends Component {
   constructor(props) {
@@ -15,6 +16,10 @@ export default class MusicPlayer extends Component {
       }
     }
   }
+
+  componentDidMount() {
+    getSpotifyAuth();
+  };
 
   render() {
     return (
