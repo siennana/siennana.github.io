@@ -36,7 +36,7 @@ export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
   try {
     const auth_token = await getSpotifyAuth();
     //get request to SPOTIFY API to access playlist
-    const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/tracks/?limit=10`;
+    const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/tracks`;
 
     const response = await axios.get(playlist_url, {
       headers: { 
@@ -58,6 +58,29 @@ export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
   }
 };
 
-//tracks -> items[] -> track -> 
-    // name, duration_ms
-    // album: name, artists
+// TODO: Change token authentication to allow user access
+export const getTopTracks = async (): Promise<SpotifyTracksResponseItem[]> => {
+  try {
+    const auth_token = await getSpotifyAuth();
+    //get request to SPOTIFY API to access playlist
+    const top_tracks_url = 'https://api.spotify.com/v1/me/top/tracks';
+
+    const response = await axios.get(top_tracks_url, {
+      headers: { 
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'application/json' 
+      },
+      params: {
+        'limit': '10',
+        'time_range': 'short_term'
+      }
+    });
+    //return tracks
+    const data = response.data.items as SpotifyTracksResponseItem[];
+    return data;
+
+  }catch(error){
+    //on fail, log the error in console
+    console.log(error);
+  }
+};

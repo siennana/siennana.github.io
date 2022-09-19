@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const tabStyle = {
   borderRadius: '5px',
-  border: '3px solid black',
+  border: '2px solid black',
   padding: '0.5rem 1rem 0.5rem 1rem',
   backgroundColor: 'rgb(233, 210, 255)',
   boxShadow: '8px 8px 1px rgba(0, 0, 0, 0.5)',
@@ -16,7 +16,7 @@ export default class Tab extends Component {
   }
   render() {
     return (
-      <div onClick={this.props.unMinimize} style={tabStyle}>{this.props.display}</div>
+      <div onClick={this.props.unminimize} style={tabStyle}>{this.props.displayName}</div>
     );
   }
 }

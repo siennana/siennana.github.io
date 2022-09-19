@@ -17,7 +17,7 @@ export default class Window extends Component {
     return (
       <div className="panel" style={this.state.parentSize}>
         <div className="top_bar">
-          <div className="descriptor">{this.props.descriptor}</div>
+          <div className="descriptor">{this.props.displayName}</div>
           <div className="buttons">
             <div className="window-button" onClick={this.props.minimize}>
               <img src="/assets/images/icons/minus.png"/>

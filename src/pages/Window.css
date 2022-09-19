@@ -1,20 +1,20 @@
 .panel {
   position: absolute;
   border-radius: 3px;
-  border: 3px solid blue;
+  border: 2px solid blue;
   top: 4rem;
   left: 12rem;
   box-shadow: 10px 10px 1px rgba(0, 0, 0, 0.5);
   background-color: white;
 }
 .panel .top_bar {
-  height: 1.5rem;
+  height: 1rem;
   width: 100%;
   border-radius: 3px 3px 0 0;
   display: flex;
   justify-content: space-between;
   cursor: move;
-  border-bottom: 3px solid blue;
+  border-bottom: 2px solid blue;
   background-color: rgb(255, 255, 255);
   align-items: center;
 }
@@ -26,23 +26,23 @@
 }
 .top_bar .window-button {
   cursor: pointer;
-  height: 1.5rem;
-  width: 1.5rem;
-  border-left: 3px solid blue;
+  height: 1rem;
+  width: 1rem;
+  border-left: 2px solid blue;
 }
 .top_bar .window-button img {
-  height: 1rem;
+  height: 0.5rem;
   padding: 4px;
 }
 .panel .content {
   position: relative;
-  height: calc(100% - 3.4rem);
+  height: calc(100% - 2.25rem);
   overflow-y: auto;
 }
 .panel-bottom-bar {
-  height: 1.5rem;
+  height: 1rem;
   width: 100%;
-  border: 3px solid blue;
+  border: 2px solid blue;
   border-left: transparent;
   background-color: rgb(255, 255, 255);
 }

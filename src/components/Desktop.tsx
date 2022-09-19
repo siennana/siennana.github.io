@@ -7,45 +7,13 @@ import ArtGallery from './desktop/art/ArtGallery';
 import MusicPlayer from './desktop/music/MusicPlayer';
 
 import { SpotifyTracksResponseItem } from '../types/spotify';
-import { getPlaylist } from '../api/spotify';
+import { getPlaylist, getTopTracks } from '../api/spotify';
 
 const tabDisplay = {
 	display: 'flex',
 	position: 'absolute',
 	top: '0',
 	left: '8rem'
-}
-const portfolio = {
-	key: 'PORTFOLIO',
-	content: <Portfolio/>,
-	init: {
-		height: '50rem',
-		width: '60rem',
-	}
-}
-const music = {
-	key: 'MUSIC PLAYER',
-	content: <MusicPlayer/>,
-	init: {
-		height: '20rem',
-		width: '40rem',
-	}
-}
-const art = {
-	key: 'ART',
-	content: <ArtGallery/>,
-	init: {
-		height: '50rem',
-		width: '60rem',
-	}
-}
-const terminal = {
-	key: 'Command Line',
-	content: <MusicPlayer/>,
-	init: {
-		height: '25rem',
-		width: '40rem',
-	}
 }
 
 function makeElementDraggable(elmnt) {
@@ -79,16 +47,62 @@ function makeElementDraggable(elmnt) {
 	}
 }
 
+type WindowObject = {
+  key: string,
+  height: string,
+  width: string,
+  displayName: string,
+  content: any,
+  minimize?: (app: any) => void,
+  close?: (app: any) => void,
+  props?: any
+}
+
+type TabObject = {
+  key: string,
+  displayName: string,
+  unminimize: () => void
+}
+
 type DesktopProps = {}
 
 type DesktopState = {
-  open_window_stack: [],
-  min_stack: [],
-  showGallery: false,
-  showMusic: false,
-  showTerminal: false,
+  window_stack: WindowObject[],
+  tab_stack: TabObject[],
   api_data: {
     tracks: SpotifyTracksResponseItem[]
+  }
+}
+
+const portfolio = (props?: any): WindowObject => {
+  return {
+    key: 'PORTFOLIO',
+    content: <Portfolio {...props}/>,
+    height: '50rem',
+    width: '60rem',
+    displayName: 'Portfolio',
+  }
+}
+type MusicPlayerProps = {
+  tracks: SpotifyTracksResponseItem[]
+}
+const music = (props: MusicPlayerProps): WindowObject => {
+  console.log(props);
+  return {
+    key: 'MUSIC PLAYER',
+    content: <MusicPlayer {...props}/>,
+    height: '20rem',
+    width: '40rem',
+    displayName: 'Music Player',
+  }
+}
+const art = (props?: any): WindowObject => {
+  return {
+    key: 'ART',
+    content: <ArtGallery {...props}/>,
+    height: '50rem',
+    width: '60rem',
+    displayName: 'Art Gallery',
   }
 }
 
@@ -96,11 +110,8 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	constructor(props: DesktopProps) {
 		super(props);
 		this.state = {
-			open_window_stack: [],
-			min_stack: [],
-			showGallery: false,
-			showMusic: false,
-			showTerminal: false,
+			window_stack: [],
+			tab_stack: [],
 			api_data: {
         tracks: []
       }
@@ -118,57 +129,59 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     });
 	}
 
-	unMinimize = (app) => {
-		const index = this.state.min_stack.findIndex(obj => {
+	unminimize = (app: WindowObject) => {
+		const index = this.state.tab_stack.findIndex(obj => {
 			return obj.key === app.key;
 		});
-		var copy = [...this.state.min_stack];
+		var copy = [...this.state.tab_stack];
 		copy.splice(index, 1);
-		this.setState({min_stack: copy});
-		console.log(this.state.min_stack);
+		this.setState({tab_stack: copy});
 		this.addToOpenStack(app);
 	}
 
-	addToMinStack = (app) => {
-		this.removeFromOpenStack(app);
+	addToMinStack = (app: WindowObject): void => {
+		this.removeFromOpenStack(app.key);
 		const item = {
-			unMinimize: () => this.unMinimize(app),
-			display: app.key,
+			unminimize: () => this.unminimize(app),
+			displayName: app.displayName,
 			key: app.key
 		}
-		this.setState({min_stack: [...this.state.min_stack, item]});
+		this.setState({tab_stack: [...this.state.tab_stack, item]});
 	}
 
-	removeFromOpenStack = (app) => {
-		const index = this.state.open_window_stack.findIndex(obj => {
-			return obj.key === app.key;
+	removeFromOpenStack = (key: string) => {
+		const index = this.state.window_stack.findIndex(obj => {
+			return obj.key === key;
 		});
-		console.log(index);
 		if (index === -1) { return }
-		var copy = [...this.state.open_window_stack];
+		var copy = [...this.state.window_stack];
 		copy.splice(index, 1);
-		this.setState({open_window_stack: copy});
+		this.setState({window_stack: copy});
 	}
 
-	addToOpenStack = (app) => {
-		const indexO = this.state.open_window_stack.findIndex(obj => {
+  getWindow = (app: WindowObject): WindowObject => {
+    return {
+      ...app,
+      minimize: () => this.addToMinStack(app),
+      close: () => this.removeFromOpenStack(app.key)
+    }
+  }
+
+	addToOpenStack = (app: WindowObject) => {
+		const indexO = this.state.window_stack.findIndex(obj => {
 			return obj.key === app.key;
 		});
 		if (indexO >= 0) { return }
 		const item = {
-			content: app.content,
-			height: app.init.height,
-			width: app.init.width,
-			close: () => this.removeFromOpenStack(app),
+			...app,
+			close: () => this.removeFromOpenStack(app.key),
 			minimize: () => this.addToMinStack(app),
-			descriptor: app.key,
-			key: app.key
 		};
-		this.setState({open_window_stack: [...this.state.open_window_stack, item]});
+		this.setState({window_stack: [...this.state.window_stack, item]});
 	}
 
 	renderOpenWindows = () => {
-		return this.state.open_window_stack.map((item) => {
+		return this.state.window_stack.map((item) => {
 			return (
 				<Window {...item} />
 			);
@@ -176,7 +189,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	}
 
 	renderMinimizedTabs = () => {
-		return this.state.min_stack.map((item) => {
+		return this.state.tab_stack.map((item) => {
 			return (
 				<Tab {...item} />
 			);
@@ -186,7 +199,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	render() {
 		return (
 			<div>
-				<div style={tabDisplay}>
+				<div style={tabDisplay as React.CSSProperties}>
 					{this.renderMinimizedTabs()}
 				</div>
 
@@ -194,7 +207,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	
 				<div className="desktop-icons">
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(art)}>
+						this.addToOpenStack(art())}>
 						<img src="/assets/images/icons/journal.png"/>
 						<div className="icon-text">art</div>
 					</div>
@@ -203,12 +216,12 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<div className="icon-text">terminal</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(portfolio)}>
+						this.addToOpenStack(portfolio())}>
 						<img src="/assets/images/icons/resume-and-cv.png"/>
 						<div className="icon-text">projects</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(music)}>
+						this.addToOpenStack(music(this.state.api_data))}>
 						<img src="/assets/images/icons/vinyl-record-player.png"/>
 						<div className="icon-text">music</div>
 					</div>

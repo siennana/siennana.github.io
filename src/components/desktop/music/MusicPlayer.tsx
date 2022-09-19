@@ -15,11 +15,12 @@ type MusicPlayerState = {
 }
 
 type MusicPlayerProps = {
-  tracks?: SpotifyTracksResponseItem[]
+  tracks: SpotifyTracksResponseItem[]
 }
 
 export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayerState> {
   constructor(props: MusicPlayerProps) {
+    console.log(props);
     super(props);
     this.state = {
       id: 0,
@@ -35,7 +36,7 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
 
   componentDidMount() {
     getPlaylist().then(res => {
-      console.log(res);
+      //console.log(res);
     });
   };
 
@@ -44,7 +45,11 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
     //console.log(this.state.tracks[0].track.name);
     return (
       <div>
-        <p>{ this.state.id.toLocaleString() }</p>
+        <ol>
+          {this.props.tracks.map((value, index) => {
+            return (<li key={index}>{value.track.name}</li>)
+          })}
+        </ol>
       </div>
     );
   }
