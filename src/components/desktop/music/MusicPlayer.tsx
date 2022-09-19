@@ -47,7 +47,9 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
       <div>
         <ol>
           {this.props.tracks.map((value, index) => {
-            return (<li key={index}>{value.track.name}</li>)
+            return (
+              <li key={index}><a href={value.track.uri}>{value.track.name}</a></li>
+            )
           })}
         </ol>
       </div>

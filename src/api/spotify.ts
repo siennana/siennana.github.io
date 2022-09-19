@@ -44,7 +44,7 @@ export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
         'Accept': 'application/json' 
       },
       params: {
-        'fields': 'items(track(name,duration_ms,album(name,artists)))',
+        'fields': 'items(track(name,duration_ms,uri,preview_url,album(name,artists)))',
         'limit': '10'
       }
     });

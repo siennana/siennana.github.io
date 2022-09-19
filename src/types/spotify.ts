@@ -12,6 +12,8 @@ export interface SpotifyTracksResponseItem {
       artists: string[]
     },
     duration_ms: string,
-    name: string
+    name: string,
+    uri: string,
+    preview_url: string,
   }
 }
