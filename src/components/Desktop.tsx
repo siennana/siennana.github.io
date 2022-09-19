@@ -6,6 +6,9 @@ import Portfolio from './desktop/portfolio/Portfolio';
 import ArtGallery from './desktop/art/ArtGallery';
 import MusicPlayer from './desktop/music/MusicPlayer';
 
+import { SpotifyTracksResponseItem } from '../types/spotify';
+import { getPlaylist } from '../api/spotify';
+
 const tabDisplay = {
 	display: 'flex',
 	position: 'absolute',
@@ -76,16 +79,43 @@ function makeElementDraggable(elmnt) {
 	}
 }
 
-export default class Desktop extends Component {
-	constructor() {
-		super();
+type DesktopProps = {}
+
+type DesktopState = {
+  open_window_stack: [],
+  min_stack: [],
+  showGallery: false,
+  showMusic: false,
+  showTerminal: false,
+  api_data: {
+    tracks: SpotifyTracksResponseItem[]
+  }
+}
+
+export default class Desktop extends Component<DesktopProps, DesktopState> {
+	constructor(props: DesktopProps) {
+		super(props);
 		this.state = {
 			open_window_stack: [],
 			min_stack: [],
 			showGallery: false,
 			showMusic: false,
-			showTerminal: false
+			showTerminal: false,
+			api_data: {
+        tracks: []
+      }
 		}
+	}
+
+	componentDidMount() {
+		getPlaylist().then(res => {
+      console.log(res);
+      this.setState({
+        api_data: {
+          tracks: res
+        }
+      });
+    });
 	}
 
 	unMinimize = (app) => {

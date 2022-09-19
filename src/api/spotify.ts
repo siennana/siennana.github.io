@@ -1,12 +1,13 @@
-import { post , get} from 'axios';
+import axios from 'axios';
 import { stringify } from 'qs';
 import { Buffer } from 'buffer';
+import { SpotifyTrack, SpotifyTracksResponseItem } from '../types/spotify';
 
 const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
 
-
+// returns spotify authentification token
 export const getSpotifyAuth = async () => {
   try{
     console.log(process.env);
@@ -14,7 +15,7 @@ export const getSpotifyAuth = async () => {
     const token_url = 'https://accounts.spotify.com/api/token';
     const data = stringify({'grant_type':'client_credentials'});
 
-    const response = await post(token_url, data, {
+    const response = await axios.post(token_url, data, {
       headers: { 
         'Authorization': `Basic ${auth_token}`,
         'Content-Type': 'application/x-www-form-urlencoded' 
@@ -30,23 +31,33 @@ export const getSpotifyAuth = async () => {
 
 const playlist_id = '6Y3I7PHLAA3ExXzJdBh8rL';
 
-export const getPlaylist = async () => {
+// returns data from a specified playlist id
+export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
   try {
     const auth_token = await getSpotifyAuth();
     //get request to SPOTIFY API to access playlist
-    const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/?limit=10`;
+    const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/tracks/?limit=10`;
 
-    const response = await get(playlist_url, {
+    const response = await axios.get(playlist_url, {
       headers: { 
         'Authorization': `Bearer ${auth_token}`,
         'Accept': 'application/json' 
+      },
+      params: {
+        'fields': 'items(track(name,duration_ms,album(name,artists)))',
+        'limit': '10'
       }
     });
     //return playlist
-    console.log(response.data.tracks);
-    return response.data;
+    const data = response.data.items as SpotifyTracksResponseItem[];
+    return data;
+
   }catch(error){
     //on fail, log the error in console
     console.log(error);
   }
 };
+
+//tracks -> items[] -> track -> 
+    // name, duration_ms
+    // album: name, artists

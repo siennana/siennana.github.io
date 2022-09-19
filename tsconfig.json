@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "types": [
+        // ... your other types
+        "node",
+        "react"
+      ],
+      "allowSyntheticDefaultImports": true,
+      "allowJs": true,
+      "jsx": "react-native",
+    },
+  }
+  
