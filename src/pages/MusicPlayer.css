@@ -1,0 +1,48 @@
+.music-player {
+  display: flex;
+  height: 100%;
+}
+.music-player-title {
+  text-align: center;
+  padding-top: 1rem;
+}
+.song-list-panel {
+  border-right: 2px solid blue;
+  width: 48%;
+  height: 100%;
+}
+.song-list-panel ol li {
+  text-decoration: underline;
+  padding-bottom: 0.5rem;
+}
+.song-list-panel ol li div {
+  cursor: pointer;
+}
+.song-selected {
+  color: royalblue;
+}
+.music-play-panel {
+  text-align: center;
+  width: 52%;
+  padding-top: 1rem;
+}
+.music-album-cover {
+  width: 100%;
+  height: auto;
+}
+.music-album-cover img {
+  max-width: 80%;
+}
+.music-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.music-button {
+  border-radius: 5px;
+  background-color: rgb(19, 193, 68);
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}

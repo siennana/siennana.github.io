@@ -70,7 +70,7 @@ type DesktopState = {
   window_stack: WindowObject[],
   tab_stack: TabObject[],
   api_data: {
-    tracks: SpotifyTracksResponseItem[]
+    top_tracks: any[]
   }
 }
 
@@ -78,20 +78,19 @@ const portfolio = (props?: any): WindowObject => {
   return {
     key: 'PORTFOLIO',
     content: <Portfolio {...props}/>,
-    height: '50rem',
-    width: '60rem',
+    height: '40rem',
+    width: '50rem',
     displayName: 'Portfolio',
   }
 }
 type MusicPlayerProps = {
-  tracks: SpotifyTracksResponseItem[]
+  top_tracks: any[]
 }
 const music = (props: MusicPlayerProps): WindowObject => {
-  console.log(props);
   return {
     key: 'MUSIC PLAYER',
     content: <MusicPlayer {...props}/>,
-    height: '20rem',
+    height: '30rem',
     width: '40rem',
     displayName: 'Music Player',
   }
@@ -100,8 +99,8 @@ const art = (props?: any): WindowObject => {
   return {
     key: 'ART',
     content: <ArtGallery {...props}/>,
-    height: '50rem',
-    width: '60rem',
+    height: '30rem',
+    width: '40rem',
     displayName: 'Art Gallery',
   }
 }
@@ -113,17 +112,17 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			window_stack: [],
 			tab_stack: [],
 			api_data: {
-        tracks: []
+        top_tracks: []
       }
 		}
 	}
 
 	componentDidMount() {
-		getPlaylist().then(res => {
+		getTopTracks().then(res => {
       console.log(res);
       this.setState({
         api_data: {
-          tracks: res
+          top_tracks: res
         }
       });
     });
@@ -139,8 +138,12 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		this.addToOpenStack(app);
 	}
 
-	addToMinStack = (app: WindowObject): void => {
+	minimize = (app: WindowObject): void => {
 		this.removeFromOpenStack(app.key);
+    const index = this.state.tab_stack.findIndex(obj => {
+			return obj.key === app.key;
+		});
+    if (index !== -1) { return; }  // tab is already in stack
 		const item = {
 			unminimize: () => this.unminimize(app),
 			displayName: app.displayName,
@@ -162,20 +165,20 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
   getWindow = (app: WindowObject): WindowObject => {
     return {
       ...app,
-      minimize: () => this.addToMinStack(app),
+      minimize: () => this.minimize(app),
       close: () => this.removeFromOpenStack(app.key)
     }
   }
 
 	addToOpenStack = (app: WindowObject) => {
-		const indexO = this.state.window_stack.findIndex(obj => {
+		const index = this.state.window_stack.findIndex(obj => {
 			return obj.key === app.key;
 		});
-		if (indexO >= 0) { return }
+		if (index !== -1) { return }
 		const item = {
 			...app,
 			close: () => this.removeFromOpenStack(app.key),
-			minimize: () => this.addToMinStack(app),
+			minimize: () => this.minimize(app),
 		};
 		this.setState({window_stack: [...this.state.window_stack, item]});
 	}
