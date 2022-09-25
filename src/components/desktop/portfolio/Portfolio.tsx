@@ -3,7 +3,7 @@ import '../../../pages/Portfolio.css';
 import PortfolioItem from './PortfolioItem';
 import { selfDescription, portfolioItems } from '../../../constants/portfolio.const';
 
-export default class Portfolio extends Component {
+export default class Portfolio extends Component<{}, {}> {
   render() {
     return (
       <div className='projects-wrapper'>

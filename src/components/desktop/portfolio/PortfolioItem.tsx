@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { PortfolioItemProps } from '../../../types/window-props';
 import '../../../pages/PortfolioItem.css';
 
-export default class PortfolioItem extends Component {
-  constructor(props) {
+
+export default class PortfolioItem extends Component<PortfolioItemProps, {}> {
+  constructor(props: PortfolioItemProps) {
     super(props);
   }
 

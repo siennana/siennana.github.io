@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import '../pages/Desktop.css';
+import { WindowProps } from '../types/window-props';
 import Window from './desktop/Window'
 import Tab from './widgets/Tab';
-import Portfolio from './desktop/portfolio/Portfolio';
-import ArtGallery from './desktop/art/ArtGallery';
-import MusicPlayer from './desktop/music/MusicPlayer';
+import { portfolio, artGallery, musicPlayer } from '../constants/init-windows.const';
 
 import { SpotifyTracksResponseItem } from '../types/spotify';
 import { getPlaylist, getTopTracks } from '../api/spotify';
@@ -16,48 +15,6 @@ const tabDisplay = {
 	left: '8rem'
 }
 
-function makeElementDraggable(elmnt) {
-	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-	if (document.getElementById(elmnt.id)) {
-		document.getElementById(elmnt.id + 'header').onmousedown  = dragMouseDown;
-	} else {
-		elmnt.onmousedown = dragMouseDown;
-	}
-	function dragMouseDown (e) {
-		e = e || window.event;
-		e.preventDefault();
-		pos3 = e.clientX;
-		pos4 = e.clientY;
-		document.onmouseup = closeDragElement;
-		document.onmousemove = elementDrag;
-	}
-	function elementDrag (e) {
-		e = e || window.event;
-		e.preventDefault();
-		pos1 = pos3 - e.clientX;
-		pos2 = pos4 - e.clientY;
-		pos3 = e.clientX;
-		pos4 = e.clientY;
-		elmnt.style.top = (elmnt.offsetTop - pos2) + 'px';
-		elmnt.style.left = (elmnt.offsetLeft - pos1) + 'px';
-	}
-	function closeDragElement () {
-		document.onmouseup = null;
-		document.onmousemove = null;
-	}
-}
-
-type WindowObject = {
-  key: string,
-  height: string,
-  width: string,
-  displayName: string,
-  content: any,
-  minimize?: (app: any) => void,
-  close?: (app: any) => void,
-  props?: any
-}
-
 type TabObject = {
   key: string,
   displayName: string,
@@ -67,41 +24,10 @@ type TabObject = {
 type DesktopProps = {}
 
 type DesktopState = {
-  window_stack: WindowObject[],
+  window_stack: WindowProps[],
   tab_stack: TabObject[],
   api_data: {
     top_tracks: any[]
-  }
-}
-
-const portfolio = (props?: any): WindowObject => {
-  return {
-    key: 'PORTFOLIO',
-    content: <Portfolio {...props}/>,
-    height: '40rem',
-    width: '50rem',
-    displayName: 'Portfolio',
-  }
-}
-type MusicPlayerProps = {
-  top_tracks: any[]
-}
-const music = (props: MusicPlayerProps): WindowObject => {
-  return {
-    key: 'MUSIC PLAYER',
-    content: <MusicPlayer {...props}/>,
-    height: '30rem',
-    width: '40rem',
-    displayName: 'Music Player',
-  }
-}
-const art = (props?: any): WindowObject => {
-  return {
-    key: 'ART',
-    content: <ArtGallery {...props}/>,
-    height: '30rem',
-    width: '40rem',
-    displayName: 'Art Gallery',
   }
 }
 
@@ -128,7 +54,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     });
 	}
 
-	unminimize = (app: WindowObject) => {
+	unminimize = (app: WindowProps) => {
 		const index = this.state.tab_stack.findIndex(obj => {
 			return obj.key === app.key;
 		});
@@ -138,7 +64,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		this.addToOpenStack(app);
 	}
 
-	minimize = (app: WindowObject): void => {
+	minimize = (app: WindowProps): void => {
 		this.removeFromOpenStack(app.key);
     const index = this.state.tab_stack.findIndex(obj => {
 			return obj.key === app.key;
@@ -162,7 +88,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		this.setState({window_stack: copy});
 	}
 
-  getWindow = (app: WindowObject): WindowObject => {
+  getWindow = (app: WindowProps): WindowProps => {
     return {
       ...app,
       minimize: () => this.minimize(app),
@@ -170,7 +96,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     }
   }
 
-	addToOpenStack = (app: WindowObject) => {
+	addToOpenStack = (app: WindowProps) => {
 		const index = this.state.window_stack.findIndex(obj => {
 			return obj.key === app.key;
 		});
@@ -184,17 +110,17 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	}
 
 	renderOpenWindows = () => {
-		return this.state.window_stack.map((item) => {
+		return this.state.window_stack.map((props) => {
 			return (
-				<Window {...item} />
+				<Window {...props} />
 			);
 		});
 	}
 
 	renderMinimizedTabs = () => {
-		return this.state.tab_stack.map((item) => {
+		return this.state.tab_stack.map((props) => {
 			return (
-				<Tab {...item} />
+				<Tab {...props} />
 			);
 		});
 	}
@@ -210,7 +136,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	
 				<div className="desktop-icons">
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(art())}>
+						this.addToOpenStack(artGallery())}>
 						<img src="/assets/images/icons/journal.png"/>
 						<div className="icon-text">art</div>
 					</div>
@@ -224,7 +150,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<div className="icon-text">projects</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(music(this.state.api_data))}>
+						this.addToOpenStack(musicPlayer(this.state.api_data))}>
 						<img src="/assets/images/icons/vinyl-record-player.png"/>
 						<div className="icon-text">music</div>
 					</div>

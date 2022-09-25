@@ -1,42 +1,21 @@
 import classNames from 'classnames';
 import React, { Component } from 'react';
+import { MusicPlayerProps } from '../../../types/window-props';
 import '../../../pages/MusicPlayer.css'
 
 type MusicPlayerState = {
-  id: Number,
-  closed: boolean,
-  minimized: boolean,
-  maximized: boolean,
-  parentSize: {
-    height: number,
-    width: number
-  },
-  currentSongData: any
-}
-
-type MusicPlayerProps = {
-  top_tracks: any[],
-}
+  currentSongData: any,
+};
 
 export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayerState> {
   constructor(props: MusicPlayerProps) {
-    console.log(props);
     super(props);
     this.state = {
-      id: 0,
-      closed: false,
-      minimized: false,
-      maximized: false,
-      parentSize: {
-        height: 0,
-        width: 0
-      },
       currentSongData: props.top_tracks[0],
     }
   }
 
   onSelectSong = (index: number) => {
-    console.log(this.state.currentSongData);
     this.setState({currentSongData: this.props.top_tracks[index]});
   }
 
@@ -45,7 +24,6 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
   }
 
   render() {
-    console.log(this.props.top_tracks);
     return (
       <div className='music-player'>
         <div className='song-list-panel'>

@@ -34,7 +34,6 @@ export const getSpotifyAuth = async () => {
 export const getRefreshToken = async () => {
   try {
     const token_url = 'https://accounts.spotify.com/api/token';
-    console.log(refresh_token);
     const data = stringify({
       'grant_type':'refresh_token',
       'refresh_token':`${refresh_token}`
@@ -60,7 +59,6 @@ const playlist_id = '6Y3I7PHLAA3ExXzJdBh8rL';
 export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
   try {
     const auth_token = await getRefreshToken();
-    console.log(auth_token);
     //get request to SPOTIFY API to access playlist
     const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/tracks`;
 
