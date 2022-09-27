@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { stringify } from 'qs';
 import { Buffer } from 'buffer';
-import { SpotifyTrack, SpotifyTracksResponseItem } from '../types/spotify';
+import { SpotifyTracksResponseItem } from '../types/spotify';
 
 const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -12,7 +12,7 @@ const refresh_token = process.env.REACT_APP_SPOTIFY_REFRESH_TOKEN;
 // this token does not allow user access
 export const getSpotifyAuth = async () => {
   try{
-    //make post request to SPOTIFY API for access token, sending relavent info
+    // make post request to SPOTIFY API for access token, sending relavent info
     const token_url = 'https://accounts.spotify.com/api/token';
     const data = stringify({'grant_type':'client_credentials'});
 
@@ -22,10 +22,10 @@ export const getSpotifyAuth = async () => {
         'Content-Type': 'application/x-www-form-urlencoded' 
       }
     });
-    //return access token
+    // return access token
     return response.data.access_token;   
   } catch (error){
-    //on fail, log the error in console
+    // on fail, log the error in console
     console.log(error);
   }
 };
@@ -72,17 +72,16 @@ export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
         'limit': '10'
       }
     });
-    //return playlist
+    // return playlist
     const data = response.data.items as SpotifyTracksResponseItem[];
     return data;
 
   } catch (error) {
-    //on fail, log the error in console
+    // on fail, log the error in console
     console.log(error);
   }
 };
 
-// TODO: Change token authentication to allow user access
 export const getTopTracks = async (): Promise<any> => {
   try {
     const auth_token = await getRefreshToken();

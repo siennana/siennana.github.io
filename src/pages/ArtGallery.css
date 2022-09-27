@@ -1,14 +1,20 @@
 .art-gallery {
-  column-count: 3;
-  margin-top: 1rem;
-  column-gap: 15px;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 1rem;
+  text-align: center;
 }
-.gallery-item {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 15px;
+.gallery-item .folder {
+  width: 6rem;
+  height: 5rem;
 }
-.art-gallery img {
-  display: block;
-  width: 100%;
+.gallery-item:hover {
+  cursor: pointer;
+}
+.gallery-item img {
+  height: 100%;
+}
+.gallery-item p {
+  margin: 0;
 }

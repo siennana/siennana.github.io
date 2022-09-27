@@ -1,37 +1,35 @@
 import React, { Component } from 'react';
 import '../pages/Desktop.css';
-import { WindowProps } from '../types/window-props';
+import { WindowProps, TabProps } from '../types/window-props';
 import Window from './desktop/Window'
 import Tab from './widgets/Tab';
 import { portfolio, artGallery, musicPlayer } from '../constants/init-windows.const';
+import { getTopTracks } from '../api/spotify';
 
-import { SpotifyTracksResponseItem } from '../types/spotify';
-import { getPlaylist, getTopTracks } from '../api/spotify';
+const getCurrentTime = (): string => {
+  const today = new Date();
+  return today.toLocaleTimeString();
+}
 
 const tabDisplay = {
 	display: 'flex',
 	position: 'absolute',
-	top: '0',
-	left: '8rem'
-}
+	bottom: '1rem',
+};
 
-type TabObject = {
-  key: string,
-  displayName: string,
-  unminimize: () => void
-}
-
-type DesktopProps = {}
+type DesktopProps = {};
 
 type DesktopState = {
   window_stack: WindowProps[],
-  tab_stack: TabObject[],
+  tab_stack: TabProps[],
   api_data: {
     top_tracks: any[]
-  }
-}
+  },
+  date: Date
+};
 
 export default class Desktop extends Component<DesktopProps, DesktopState> {
+  timer;
 	constructor(props: DesktopProps) {
 		super(props);
 		this.state = {
@@ -39,20 +37,30 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			tab_stack: [],
 			api_data: {
         top_tracks: []
-      }
+      },
+      date: new Date()
 		}
 	}
 
 	componentDidMount() {
 		getTopTracks().then(res => {
-      console.log(res);
       this.setState({
         api_data: {
           top_tracks: res
         }
       });
     });
+
+    this.timer = setInterval(() => {
+      this.setState({
+        date: new Date()
+      });
+    }, 1000);
 	}
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
 	unminimize = (app: WindowProps) => {
 		const index = this.state.tab_stack.findIndex(obj => {
@@ -156,12 +164,13 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 					</div>
 				</div>
 	
-				<div className="desktop-bottom-bar">
+				<div className="desktop-top-bar">
 					<div className="link-wrapper">
 							<a href="http://github.com/siennana" target = "_blank"><img src="/assets/images/icons/github-sketchy.png"/></a>
 							<a href="http://www.linkedin.com/in/siennab" target = "_blank"><img src="./assets/images/icons/linkedin-sketchy.png"/></a>
 							<a href="https://open.spotify.com/user/sienna.brown-us" target="_blank"><img src="/assets/images/icons/spotify-sketchy.png"/></a>
 							<a href="mailto:sienna.kaylenb@gmail.com" target="_blank"><img src="/assets/images/icons/gmail-sketchy.png"/></a>
+              <div className='time'>{this.state.date.toLocaleTimeString()}</div>
 					</div>
 				</div>
 			</div>

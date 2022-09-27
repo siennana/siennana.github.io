@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 body {
-  background-color: rgb(218, 210, 255);
+  background-color: rgb(219, 220, 255);
   background-size: 35px 35px;
   background-image:
     linear-gradient(to right, rgba(0, 0, 255, 0.3) 1px, transparent 1px),
@@ -14,7 +14,7 @@ h1 {
 }
 .desktop-icons {
   position: absolute;
-  margin-left: 2rem;
+  margin: 1rem 0 0 2rem;
 }
 .icon {
   text-align: center;
@@ -29,62 +29,39 @@ h1 {
 .icon img:hover {
   transform: translateY(-5px);
 }
-#side-info-view {
+/*Top Bar*************************************************************/
+.desktop-top-bar {
   position: fixed;
   top: 0;
-  right: -400px;
-  height: 100vh;
-  width: 400px;
-  border-left: 3px solid black;
-  background-color: rgb(219, 221, 236);
-  font-family: 'Klee One', cursive;
-}
-.slide-right {
-  animation-name: slide-right;
-  animation-duration: 5s;
-}
-.slide-left {
-  animation-name: slide-left;
-  animation-duration: 5s;
-}
-@keyframes slide-right {
-  0% {right:0px;}
-  50% {right:-400px;}
-}
-@keyframes slide-left {
-  0% {right:-400px;}
-  50% {right:0px;}
-}
-/*Bottom Bar*************************************************************/
-.desktop-bottom-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 30%;
-  width: 40%;
+  right: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 5px;
-  border: 2px solid #030921;
-  border-radius: 10px;
-  box-shadow: 8px 8px 1px rgba(0, 0, 0, 0.5);
-  background-color: rgba(233, 210, 255, 0);
+  justify-content: right;
+  padding: 0.4rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  margin: 0.5rem;
+  box-shadow: 6px 6px 2px rgba(6, 0, 55, 0.4);
 }
-.desktop-bottom-bar img {
-  width: 2rem;
+.desktop-top-bar img {
+  width: 1.2rem;
   height: auto;
 }
 .link-wrapper {
   display: flex;
   flex-direction: row;
+  margin-right: 1rem;
 }
 .link-wrapper a {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0 1rem 0 1rem;
 }
 .link-wrapper img {
   transition: all ease-in-out 100ms;
 }
 .link-wrapper img:hover {
   transform: translateY(-3px);
+}
+.link-wrapper .time {
+  font-weight: 500;
+  font-size: 1.2rem;
 }

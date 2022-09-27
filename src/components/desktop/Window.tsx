@@ -18,10 +18,10 @@ export default class Window extends Component<WindowProps, WindowState> {
             <div className="descriptor">{this.props.displayName}</div>
             <div className="buttons">
               <div className="window-button" onClick={this.props.minimize}>
-                <img src="/assets/images/icons/minus.png"/>
+                -
               </div>
               <div className="window-button" onClick={this.props.close}>
-                <img src="/assets/images/icons/close.png"/>
+                x
               </div>
             </div>
           </div>

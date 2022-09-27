@@ -4,45 +4,42 @@
   border: 2px solid blue;
   top: 4rem;
   left: 12rem;
-  box-shadow: 10px 10px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 8px 1px rgba(0, 0, 255, 0.5);
   background-color: white;
 }
 .panel .top_bar {
-  height: 1rem;
+  height: 1.5rem;
   width: 100%;
-  border-radius: 3px 3px 0 0;
+  border-radius: 2px 2px 0 0;
   display: flex;
   justify-content: space-between;
   cursor: move;
   border-bottom: 2px solid blue;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   align-items: center;
+  color: blue;
 }
 .top_bar .descriptor {
   margin-left: 0.5rem;
 }
 .top_bar .buttons {
   display: flex;
+  height: 100%;
 }
 .top_bar .window-button {
   cursor: pointer;
-  height: 1rem;
-  width: 1rem;
   border-left: 2px solid blue;
-}
-.top_bar .window-button img {
-  height: 0.5rem;
-  padding: 4px;
+  padding: 0 0.7rem 0 0.7rem;
 }
 .panel .content {
   position: relative;
-  height: calc(100% - 2.25rem);
+  height: calc(100% - 3.3rem);
   overflow-y: auto;
 }
 .panel-bottom-bar {
-  height: 1rem;
+  height: 1.5rem;
   width: 100%;
   border: 2px solid blue;
   border-left: transparent;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }

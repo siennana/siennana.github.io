@@ -7,7 +7,7 @@ export type PortfolioItemProps = {
   dateRange: string,
   description: string,
   skills?: string[],
-}
+};
 
 export type WindowProps = {
   key: string,
@@ -23,5 +23,11 @@ export type WindowProps = {
   displayName: string,
   minimize?: (self: any) => void,
   close?: (self: any) => void,
+};
+
+export type TabProps = {
+  key: string,
+  displayName: string,
+  unminimize: () => void,
 };
 

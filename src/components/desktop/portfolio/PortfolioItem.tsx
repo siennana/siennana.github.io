@@ -4,14 +4,11 @@ import '../../../pages/PortfolioItem.css';
 
 
 export default class PortfolioItem extends Component<PortfolioItemProps, {}> {
-  constructor(props: PortfolioItemProps) {
-    super(props);
-  }
 
 	render() {
     return (
       <div className='portfolioItem-wrapper'>
-        <h2 className='portfolioItem-header'>{this.props.title}</h2>
+        <div className='portfolioItem-header'>{this.props.title}</div>
         <p>{this.props.dateRange}</p>
         <p>{this.props.description}</p>
         <ul>
