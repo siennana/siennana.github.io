@@ -1,10 +1,10 @@
 .panel {
   position: absolute;
   border-radius: 3px;
-  border: 2px solid blue;
+  border: 2px solid black;
   top: 4rem;
   left: 12rem;
-  box-shadow: 8px 8px 1px rgba(0, 0, 255, 0.5);
+  box-shadow: 8px 8px 1px black;
   background-color: white;
 }
 .panel .top_bar {
@@ -14,10 +14,9 @@
   display: flex;
   justify-content: space-between;
   cursor: move;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid black;
   background-color: white;
   align-items: center;
-  color: blue;
 }
 .top_bar .descriptor {
   margin-left: 0.5rem;
@@ -28,7 +27,7 @@
 }
 .top_bar .window-button {
   cursor: pointer;
-  border-left: 2px solid blue;
+  border-left: 2px solid black;
   padding: 0 0.7rem 0 0.7rem;
 }
 .panel .content {
@@ -39,7 +38,7 @@
 .panel-bottom-bar {
   height: 1.5rem;
   width: 100%;
-  border: 2px solid blue;
+  border: 2px solid black;
   border-left: transparent;
   background-color: white;
 }

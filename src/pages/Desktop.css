@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 body {
-  background-color: rgb(219, 220, 255);
+  background-color: white;
   background-size: 35px 35px;
   background-image:
     linear-gradient(to right, rgba(0, 0, 255, 0.3) 1px, transparent 1px),
@@ -14,7 +14,7 @@ h1 {
 }
 .desktop-icons {
   position: absolute;
-  margin: 1rem 0 0 2rem;
+  margin: 3rem 0 0 2rem;
 }
 .icon {
   text-align: center;
@@ -33,15 +33,12 @@ h1 {
 .desktop-top-bar {
   position: fixed;
   top: 0;
-  right: 0;
+  width: 100%;
   display: flex;
+  padding: 0.3rem;
+  background-color: white;
+  border-bottom: 2px solid black;
   justify-content: right;
-  padding: 0.4rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgb(0, 0, 0);
-  border-radius: 5px;
-  margin: 0.5rem;
-  box-shadow: 6px 6px 2px rgba(6, 0, 55, 0.4);
 }
 .desktop-top-bar img {
   width: 1.2rem;

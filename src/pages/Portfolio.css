@@ -1,8 +1,27 @@
 .projects-wrapper {
   margin: auto;
-  padding: 2rem;
-  color: blue;
 }
+.portfolio-content {
+  padding: 2rem;
+}
+/*portfolio tabs********************************************************/
+.portfolio-tabs {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0  0 1rem;
+  border-bottom: 2px solid black;
+}
+.portfolio-tab {
+  border-radius: 5px 5px 0 0;
+  border: 2px solid black;
+  border-bottom: none;
+  width: 5rem;
+  text-align: center;
+}
+.portfolio-tab:hover {
+  cursor: pointer;
+}
+
 .portfolio-header {
   font-size: 3rem;
   margin: 0 0 2rem 0;
@@ -20,11 +39,11 @@
   display: block;
   text-decoration: none;
   border-radius: 2px;
-  border: 3px solid blue;
+  border: 3px solid black;
   margin: 0.5rem 0.5rem 0.5rem 0;
   padding: 0.5rem;
   transition: transform 100ms, box-shadow 100ms;
-  color: blue;
+  color: black;
 }
 .portfolio-links a:hover {
   cursor: pointer;
