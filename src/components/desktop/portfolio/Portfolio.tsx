@@ -53,15 +53,17 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioState>
         </div>
       );
     }
-  }
+  };
+
+  isSelected = (tabKey: TabKey) => this.state.selectedTab === tabKey;
 
   render() {
     return (
       <div className='projects-wrapper'>
         <div className='portfolio-tabs'>
-          <div className='portfolio-tab' onClick={() => this.changeTab('personal')}>Personal</div>
-          <div className='portfolio-tab' onClick={() => this.changeTab('work')}>Work</div>
-          <div className='portfolio-tab' onClick={() => this.changeTab('resume')}>Resume</div>
+          <div className={this.isSelected('personal') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('personal')}>Personal</div>
+          <div className={this.isSelected('work') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('work')}>Work</div>
+          <div className={this.isSelected('resume') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('resume')}>Resume</div>
         </div>
         <div className='portfolio-content'>
           {this.showResume()}

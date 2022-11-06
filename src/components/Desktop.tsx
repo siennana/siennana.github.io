@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import '../pages/Desktop.css';
-import { WindowProps, TabProps } from '../types/window-props';
+import { WindowProps, TabProps, ArtGalleryItemProps } from '../types/window-props';
 import Window from './desktop/Window'
-import Tab from './widgets/Tab';
 import WindowBar from './widgets/WindowBar';
-import { portfolio, artGallery, musicPlayer } from '../constants/init-windows.const';
+import { portfolio, artGallery, artGalleryItem, musicPlayer } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
 
 const tabDisplay = {
@@ -130,6 +129,10 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		});
 	}
 
+	openGalleryItem = (imageSrc: string) => {
+    this.addToOpenStack(artGalleryItem({imageSrc: imageSrc}));
+  }
+
 	render() {
 		return (
 			<div>
@@ -141,12 +144,12 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	
 				<div className="desktop-icons">
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(artGallery())}>
+						this.addToOpenStack(artGallery({openArtGalleryItem: this.openGalleryItem}))}>
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">art</div>
 					</div>
 					<div className="icon">
-          <img src="/assets/images/icons/folder.png"/>
+          				<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
 					<div className="icon" onClick={() => 

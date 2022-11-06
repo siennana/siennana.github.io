@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import '../../../pages/ArtGallery.css';
+import { ArtGalleryProps } from '../../../types/window-props';
 
 const images = [
   "/assets/images/art/IMG_1055[3575]_1.jpg",
@@ -11,15 +12,15 @@ const images = [
   "/assets/images/art/IMG_2056[4109].jpg"
 ]
 
-export default class ArtGallery extends Component<{}, {}> {
+export default class ArtGallery extends Component<ArtGalleryProps, {}> {
   render() {
     return (
       <div className="art-gallery">
         {images.map((value, index) => {
           return (
             <div key={index} className='gallery-item'>
-              <div className='folder'><img src='/assets/images/icons/folder.png'/></div>
-              <div>image</div>
+              <div className='folder' onClick={() => this.props.openArtGalleryItem(value)}><img src='/assets/images/icons/folder.png'/></div>
+              <div>image {index}</div>
             </div>
           )
         })}

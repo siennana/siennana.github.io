@@ -35,3 +35,11 @@ export type TabProps = {
   close?: (self: any) => void,
 };
 
+export type ArtGalleryProps = {
+  openArtGalleryItem: (imageSrc: string) => void,
+};
+
+export type ArtGalleryItemProps = {
+  imageSrc: string,
+};
+

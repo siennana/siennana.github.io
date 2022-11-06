@@ -1,7 +1,8 @@
 import Portfolio from "../components/desktop/portfolio/Portfolio";
 import MusicPlayer from "../components/desktop/music/MusicPlayer";
 import ArtGallery from "../components/desktop/art/ArtGallery";
-import { WindowProps, MusicPlayerProps } from "../types/window-props";
+import ArtGalleryItem from "../components/desktop/art/ArtGalleryItem";
+import { WindowProps, MusicPlayerProps, ArtGalleryItemProps, ArtGalleryProps } from "../types/window-props";
 
 export const portfolio = (props?: any): WindowProps => {
   return {
@@ -19,7 +20,7 @@ export const portfolio = (props?: any): WindowProps => {
   }
 };
 
-export const artGallery = (props?: any): WindowProps => {
+export const artGallery = (props?: ArtGalleryProps): WindowProps => {
   return {
     key: 'ARTGALLERY',
     size: {
@@ -48,5 +49,21 @@ export const musicPlayer = (props?: MusicPlayerProps): WindowProps => {
     },
     content: <MusicPlayer {...props}/>,
     displayName: 'Music Player',
+  }
+};
+
+export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
+  return {
+    key: props.imageSrc,
+    size: {
+      height: '35rem',
+      width: '30rem',
+    },
+    position: {
+      x: 0,
+      y: 0,
+    },
+    content: <ArtGalleryItem {...props}/>,
+    displayName: props.imageSrc,
   }
 };

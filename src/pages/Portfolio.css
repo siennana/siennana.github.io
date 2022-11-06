@@ -22,13 +22,19 @@
 .portfolio-tab:hover {
   cursor: pointer;
 }
+.selected-tab {
+  background-color: black;
+  color: white;
+}
 .resume-link {
   text-decoration: none;
   border-radius: 2px;
   border: 2px solid black;
-  padding: 0.5rem;
+  padding: 0.3rem;
+  margin: 0 0 2rem 0;
   color: black;
   background-color: white;
+  float: right;
 }
 .resume-link:hover {
   cursor: pointer;

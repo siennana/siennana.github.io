@@ -14,6 +14,10 @@
 }
 .gallery-item img {
   height: 100%;
+  transition: all ease-in-out 100ms;
+}
+.gallery-item img:hover {
+  transform: translateY(-3px);
 }
 .gallery-item p {
   margin: 0;
