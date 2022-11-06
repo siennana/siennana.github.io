@@ -24,6 +24,7 @@ export type WindowProps = {
   minimize?: (self: any) => void,
   unminimize?: (self: any) => void,
   close?: (self: any) => void,
+  bringWindowToFront?: (key: string) => void,
 };
 
 export type TabProps = {

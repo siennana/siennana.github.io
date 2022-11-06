@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   margin: 1rem;
   text-align: center;
+  line-height: 0.5rem;
 }
 .gallery-item .folder {
   width: 6rem;

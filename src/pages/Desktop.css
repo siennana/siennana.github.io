@@ -19,6 +19,7 @@ h1 {
 .icon {
   text-align: center;
   margin-top: 1.5rem;
+  line-height: 0.8rem;
 }
 .icon img {
   width: 3rem;

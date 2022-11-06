@@ -67,3 +67,19 @@ export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
     displayName: props.imageSrc,
   }
 };
+
+export const defaultWindow = (key: string): WindowProps => {
+  return {
+    key: key,
+    size: {
+      height: '15rem',
+      width: '20rem',
+    },
+    position: {
+      x: 0,
+      y: 0,
+    },
+    content: <div>Coming soon!</div>,
+    displayName: key,
+  }
+};

@@ -3,7 +3,7 @@ import '../pages/Desktop.css';
 import { WindowProps, TabProps, ArtGalleryItemProps } from '../types/window-props';
 import Window from './desktop/Window'
 import WindowBar from './widgets/WindowBar';
-import { portfolio, artGallery, artGalleryItem, musicPlayer } from '../constants/init-windows.const';
+import { portfolio, artGallery, artGalleryItem, musicPlayer, defaultWindow } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
 
 const tabDisplay = {
@@ -78,7 +78,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     const index = this.state.tab_stack.findIndex(obj => {
 			return obj.key === app.key;
 		});
-    if (index !== -1) { return; }  // tab is already in stack
+    if (index !== -1) { return }  // tab is already in stack
 		const item = {
       minimized: true,
 			unminimize: () => this.unminimize(app),
@@ -99,6 +99,11 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		this.setState({window_stack: copy});
 	}
 
+  // TODO: cause selected window to have highest z-index in window stack
+  bringWindowToFront = (key: string) => {
+    console.log('bringing window to front!');
+  }
+
 	addToOpenStack = (app: WindowProps) => {
 		const index = this.state.window_stack.findIndex(obj => {
 			return obj.key === app.key;
@@ -109,6 +114,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			close: () => this.removeFromOpenStack(app.key),
 			minimize: () => this.minimize(app),
       unminimize: () => this.unminimize(app),
+      bringWindowToFront: () => this.bringWindowToFront(app.key),
 		};
 		this.setState({window_stack: [...this.state.window_stack, item]});
 	}
@@ -143,13 +149,19 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 				{this.renderOpenWindows()}
 	
 				<div className="desktop-icons">
+          <div className="icon" onClick={() => 
+						this.addToOpenStack(defaultWindow('about'))}>
+          	<img src="/assets/images/icons/folder.png"/>
+						<div className="icon-text">about</div>
+					</div>
 					<div className="icon" onClick={() => 
 						this.addToOpenStack(artGallery({openArtGalleryItem: this.openGalleryItem}))}>
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">art</div>
 					</div>
-					<div className="icon">
-          				<img src="/assets/images/icons/folder.png"/>
+					<div className="icon" onClick={() => 
+						this.addToOpenStack(defaultWindow('terminal'))}>
+          	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
 					<div className="icon" onClick={() => 
@@ -161,6 +173,11 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						this.addToOpenStack(musicPlayer(this.state.api_data))}>
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">music</div>
+					</div>
+          <div className="icon" onClick={() => 
+						this.addToOpenStack(defaultWindow('blog'))}>
+          	<img src="/assets/images/icons/folder.png"/>
+						<div className="icon-text">blog</div>
 					</div>
 				</div>
 	
