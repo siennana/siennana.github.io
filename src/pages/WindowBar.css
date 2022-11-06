@@ -1,0 +1,29 @@
+.minimized {
+  border: 2px solid black;
+  box-shadow: 6px 6px 1px black;
+  cursor: pointer;
+  text-align: center;
+}
+.top_bar {
+  height: 1.5rem;
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+  background-color: white;
+  align-items: center;
+}
+.top_bar .descriptor {
+  margin: 0 0.5rem 0 0.5rem;
+  min-width: 6rem;
+}
+.top_bar .buttons {
+  display: flex;
+  height: 100%;
+}
+.top_bar .window-button {
+  cursor: pointer;
+  border-left: 2px solid black;
+  padding: 0 0.7rem 0 0.7rem;
+}

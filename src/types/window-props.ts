@@ -22,12 +22,16 @@ export type WindowProps = {
   content: any,
   displayName: string,
   minimize?: (self: any) => void,
+  unminimize?: (self: any) => void,
   close?: (self: any) => void,
 };
 
 export type TabProps = {
   key: string,
   displayName: string,
-  unminimize: () => void,
+  minimized?: boolean,
+  minimize?: (self: any) => void,
+  unminimize?: (self: any) => void,
+  close?: (self: any) => void,
 };
 

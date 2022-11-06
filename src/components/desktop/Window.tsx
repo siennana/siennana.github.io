@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import { WindowProps } from '../../types/window-props';
+import { TabProps, WindowProps } from '../../types/window-props';
 import '../../pages/Window.css';
+import WindowBar from '../widgets/WindowBar';
 
 type WindowState = {}
 
@@ -10,21 +11,13 @@ export default class Window extends Component<WindowProps, WindowState> {
     super(props);
   }
 
+  childProps = this.props as Pick<WindowProps, 'key' | 'displayName' | 'close'>;
+
   render() {
     return (
       <Draggable>
         <div className="panel" style={this.props.size}>
-          <div className="top_bar">
-            <div className="descriptor">{this.props.displayName}</div>
-            <div className="buttons">
-              <div className="window-button" onClick={this.props.minimize}>
-                -
-              </div>
-              <div className="window-button" onClick={this.props.close}>
-                x
-              </div>
-            </div>
-          </div>
+          <WindowBar {...this.props as Pick<WindowProps, 'key'| 'displayName' | 'close' | 'minimize' | 'unminimize'>}/>
           <div className="content">
             {this.props.content}
           </div>

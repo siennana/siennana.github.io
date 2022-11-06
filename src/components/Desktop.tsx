@@ -3,18 +3,16 @@ import '../pages/Desktop.css';
 import { WindowProps, TabProps } from '../types/window-props';
 import Window from './desktop/Window'
 import Tab from './widgets/Tab';
+import WindowBar from './widgets/WindowBar';
 import { portfolio, artGallery, musicPlayer } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
-
-const getCurrentTime = (): string => {
-  const today = new Date();
-  return today.toLocaleTimeString();
-}
 
 const tabDisplay = {
 	display: 'flex',
 	position: 'absolute',
 	bottom: '1rem',
+	left: '1rem',
+	gap: '1rem',
 };
 
 type DesktopProps = {};
@@ -62,13 +60,17 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     clearInterval(this.timer);
   }
 
-	unminimize = (app: WindowProps) => {
-		const index = this.state.tab_stack.findIndex(obj => {
-			return obj.key === app.key;
+  removeFromTabStack = (key: string): void => {
+    const index = this.state.tab_stack.findIndex(obj => {
+			return obj.key === key;
 		});
 		var copy = [...this.state.tab_stack];
 		copy.splice(index, 1);
 		this.setState({tab_stack: copy});
+  }
+
+	unminimize = (app: WindowProps) => {
+		this.removeFromTabStack(app.key);
 		this.addToOpenStack(app);
 	}
 
@@ -79,7 +81,9 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		});
     if (index !== -1) { return; }  // tab is already in stack
 		const item = {
+      minimized: true,
 			unminimize: () => this.unminimize(app),
+      close: () => this.removeFromTabStack(app.key),
 			displayName: app.displayName,
 			key: app.key
 		}
@@ -96,14 +100,6 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		this.setState({window_stack: copy});
 	}
 
-  getWindow = (app: WindowProps): WindowProps => {
-    return {
-      ...app,
-      minimize: () => this.minimize(app),
-      close: () => this.removeFromOpenStack(app.key)
-    }
-  }
-
 	addToOpenStack = (app: WindowProps) => {
 		const index = this.state.window_stack.findIndex(obj => {
 			return obj.key === app.key;
@@ -113,6 +109,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			...app,
 			close: () => this.removeFromOpenStack(app.key),
 			minimize: () => this.minimize(app),
+      unminimize: () => this.unminimize(app),
 		};
 		this.setState({window_stack: [...this.state.window_stack, item]});
 	}
@@ -128,7 +125,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	renderMinimizedTabs = () => {
 		return this.state.tab_stack.map((props) => {
 			return (
-				<Tab {...props} />
+				<WindowBar {...props} />
 			);
 		});
 	}
@@ -145,21 +142,21 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 				<div className="desktop-icons">
 					<div className="icon" onClick={() => 
 						this.addToOpenStack(artGallery())}>
-						<img src="/assets/images/icons/journal.png"/>
+						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">art</div>
 					</div>
 					<div className="icon">
-						<img src="/assets/images/icons/terminal.png"/>
+          <img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
 					<div className="icon" onClick={() => 
 						this.addToOpenStack(portfolio())}>
-						<img src="/assets/images/icons/resume-and-cv.png"/>
+						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">projects</div>
 					</div>
 					<div className="icon" onClick={() => 
 						this.addToOpenStack(musicPlayer(this.state.api_data))}>
-						<img src="/assets/images/icons/vinyl-record-player.png"/>
+						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">music</div>
 					</div>
 				</div>
