@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import '../pages/Desktop.css';
-import { WindowProps, TabProps, ArtGalleryItemProps } from '../types/window-props';
+import ReactMarkdown from 'react-markdown';
+import { WindowProps, TabProps } from '../types/window-props';
 import Window from './desktop/Window'
 import WindowBar from './widgets/WindowBar';
-import { portfolio, artGallery, artGalleryItem, musicPlayer, defaultWindow } from '../constants/init-windows.const';
+import { portfolio, artGallery, artGalleryItem, musicPlayer, genericWindow } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
+
+import about from './desktop/about/about.md';
 
 const tabDisplay = {
 	display: 'flex',
@@ -53,6 +56,8 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
         date: new Date()
       });
     }, 1000);
+
+    this.addToOpenStack(genericWindow('about', about));
 	}
 
   componentWillUnmount() {
@@ -150,7 +155,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	
 				<div className="desktop-icons">
           <div className="icon" onClick={() => 
-						this.addToOpenStack(defaultWindow('about'))}>
+						this.addToOpenStack(genericWindow('about', about))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">about</div>
 					</div>
@@ -160,7 +165,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<div className="icon-text">art</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(defaultWindow('terminal'))}>
+						this.addToOpenStack(genericWindow('terminal'))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
@@ -175,7 +180,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<div className="icon-text">music</div>
 					</div>
           <div className="icon" onClick={() => 
-						this.addToOpenStack(defaultWindow('blog'))}>
+						this.addToOpenStack(genericWindow('blog'))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">blog</div>
 					</div>

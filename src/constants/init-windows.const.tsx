@@ -2,6 +2,7 @@ import Portfolio from "../components/desktop/portfolio/Portfolio";
 import MusicPlayer from "../components/desktop/music/MusicPlayer";
 import ArtGallery from "../components/desktop/art/ArtGallery";
 import ArtGalleryItem from "../components/desktop/art/ArtGalleryItem";
+import GenericComponent from "../components/generic/GenericComponent";
 import { WindowProps, MusicPlayerProps, ArtGalleryItemProps, ArtGalleryProps } from "../types/window-props";
 
 export const portfolio = (props?: any): WindowProps => {
@@ -68,18 +69,20 @@ export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
   }
 };
 
-export const defaultWindow = (key: string): WindowProps => {
+export const genericWindow = (key: string, mdSource?: string): WindowProps => {
+  const defaultContent = <div>Coming Soon!</div>
+  const windowContent = mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
   return {
     key: key,
     size: {
-      height: '15rem',
-      width: '20rem',
+      height: '30rem',
+      width: '25rem',
     },
     position: {
       x: 0,
       y: 0,
     },
-    content: <div>Coming soon!</div>,
+    content: windowContent,
     displayName: key,
   }
 };
