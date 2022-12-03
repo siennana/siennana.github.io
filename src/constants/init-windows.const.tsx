@@ -7,14 +7,14 @@ import { WindowProps, MusicPlayerProps, ArtGalleryItemProps, ArtGalleryProps } f
 
 export const portfolio = (props?: any): WindowProps => {
   return {
-    key: 'PORTFOLIO',
+    id: 'PORTFOLIO',
     size: {
       height: '40rem',
       width: '50rem',
     },
     position: {
-      x: 0,
-      y: 0,
+      x: 100,
+      y: 100,
     },
     content: <Portfolio {...props}/>,
     displayName: 'Portfolio',
@@ -23,14 +23,14 @@ export const portfolio = (props?: any): WindowProps => {
 
 export const artGallery = (props?: ArtGalleryProps): WindowProps => {
   return {
-    key: 'ARTGALLERY',
+    id: 'ARTGALLERY',
     size: {
       height: '30rem',
       width: '40rem',
     },
     position: {
-      x: 0,
-      y: 0,
+      x: 50,
+      y: 50,
     },
     content: <ArtGallery {...props}/>,
     displayName: 'Art Gallery',
@@ -39,14 +39,14 @@ export const artGallery = (props?: ArtGalleryProps): WindowProps => {
 
 export const musicPlayer = (props?: MusicPlayerProps): WindowProps => {
   return {
-    key: 'MUSICPLAYER',
+    id: 'MUSICPLAYER',
     size: {
       height: '30rem',
       width: '40rem',
     },
     position: {
-      x: 0,
-      y: 0,
+      x: 150,
+      y: 150,
     },
     content: <MusicPlayer {...props}/>,
     displayName: 'Music Player',
@@ -55,14 +55,14 @@ export const musicPlayer = (props?: MusicPlayerProps): WindowProps => {
 
 export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
   return {
-    key: props.imageSrc,
+    id: props.imageSrc,
     size: {
       height: '35rem',
       width: '30rem',
     },
     position: {
-      x: 0,
-      y: 0,
+      x: 150,
+      y: 80,
     },
     content: <ArtGalleryItem {...props}/>,
     displayName: props.imageSrc,
@@ -73,7 +73,7 @@ export const genericWindow = (key: string, mdSource?: string): WindowProps => {
   const defaultContent = <div>Coming Soon!</div>
   const windowContent = mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
   return {
-    key: key,
+    id: key,
     size: {
       height: '30rem',
       width: '25rem',

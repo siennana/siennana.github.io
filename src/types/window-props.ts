@@ -10,7 +10,7 @@ export type PortfolioItemProps = {
 };
 
 export type WindowProps = {
-  key: string,
+  id: string,
   size: {
     height: string,
     width: string,
@@ -24,11 +24,11 @@ export type WindowProps = {
   minimize?: (self: any) => void,
   unminimize?: (self: any) => void,
   close?: (self: any) => void,
-  bringWindowToFront?: (key: string) => void,
+  bringWindowToFront?: (key: string, position: {x: number, y: number}) => void,
 };
 
 export type TabProps = {
-  key: string,
+  id: string,
   displayName: string,
   minimized?: boolean,
   minimize?: (self: any) => void,

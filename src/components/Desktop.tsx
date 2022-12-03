@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../pages/Desktop.css';
-import ReactMarkdown from 'react-markdown';
 import { WindowProps, TabProps } from '../types/window-props';
 import Window from './desktop/Window'
 import WindowBar from './widgets/WindowBar';
@@ -66,7 +65,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 
   removeFromTabStack = (key: string): void => {
     const index = this.state.tab_stack.findIndex(obj => {
-			return obj.key === key;
+			return obj.id === key;
 		});
 		var copy = [...this.state.tab_stack];
 		copy.splice(index, 1);
@@ -74,68 +73,72 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
   }
 
 	unminimize = (app: WindowProps) => {
-		this.removeFromTabStack(app.key);
+		this.removeFromTabStack(app.id);
 		this.addToOpenStack(app);
 	}
 
 	minimize = (app: WindowProps): void => {
-		this.removeFromOpenStack(app.key);
+		this.removeFromOpenStack(app.id);
     const index = this.state.tab_stack.findIndex(obj => {
-			return obj.key === app.key;
+			return obj.id === app.id;
 		});
     if (index !== -1) { return }  // tab is already in stack
 		const item = {
       minimized: true,
 			unminimize: () => this.unminimize(app),
-      close: () => this.removeFromTabStack(app.key),
+      close: () => this.removeFromTabStack(app.id),
 			displayName: app.displayName,
-			key: app.key
+			id: app.id
 		}
 		this.setState({tab_stack: [...this.state.tab_stack, item]});
 	}
 
-	removeFromOpenStack = (key: string) => {
+	removeFromOpenStack = (key: string): WindowProps => {
 		const index = this.state.window_stack.findIndex(obj => {
-			return obj.key === key;
+			return obj.id === key;
 		});
 		if (index === -1) { return }
 		var copy = [...this.state.window_stack];
-		copy.splice(index, 1);
+		const removedItem  = copy.splice(index, 1)[0];
 		this.setState({window_stack: copy});
+    return removedItem;
 	}
-
-  // TODO: cause selected window to have highest z-index in window stack
-  bringWindowToFront = (key: string) => {
-    console.log('bringing window to front!');
-  }
 
 	addToOpenStack = (app: WindowProps) => {
 		const index = this.state.window_stack.findIndex(obj => {
-			return obj.key === app.key;
+			return obj.id === app.id;
 		});
 		if (index !== -1) { return }
 		const item = {
 			...app,
-			close: () => this.removeFromOpenStack(app.key),
+			close: () => this.removeFromOpenStack(app.id),
 			minimize: () => this.minimize(app),
       unminimize: () => this.unminimize(app),
-      bringWindowToFront: () => this.bringWindowToFront(app.key),
+      bringWindowToFront: () => this.bringWindowToFront(app.id, app.position),
 		};
 		this.setState({window_stack: [...this.state.window_stack, item]});
 	}
 
+  bringWindowToFront = (key: string, pos: {x: number, y: number}) => {
+    var copy = [...this.state.window_stack];
+    const itemIndex = copy.findIndex(obj => obj.id === key);
+    let item = copy.splice(itemIndex, 1)[0];
+    item.position = pos;
+    this.setState({window_stack: [...copy, item]});
+  }
+
 	renderOpenWindows = () => {
-		return this.state.window_stack.map((props) => {
+		return this.state.window_stack.map((props, index) => {
 			return (
-				<Window {...props} />
+				<Window {...props} key={index}/>
 			);
 		});
 	}
 
 	renderMinimizedTabs = () => {
-		return this.state.tab_stack.map((props) => {
+		return this.state.tab_stack.map((props, index) => {
 			return (
-				<WindowBar {...props} />
+				<WindowBar {...props} key={index}/>
 			);
 		});
 	}
