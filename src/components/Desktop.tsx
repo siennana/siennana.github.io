@@ -69,6 +69,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     const index = this.state.tab_stack.findIndex(obj => {
 			return obj.id === key;
 		});
+    if (index === -1) { return }
 		var copy = [...this.state.tab_stack];
 		copy.splice(index, 1);
 		this.setState({tab_stack: copy});
@@ -128,6 +129,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     this.setState({z_stack: [...this.state.z_stack, item.id]});
 	}
 
+
   // updates z-index of all windows with the key-window having highest z-index
   updateZStack = (key: string) => {
     var copy = [...this.state.z_stack];
@@ -172,32 +174,32 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	
 				<div className="desktop-icons">
           <div className="icon" onClick={() => 
-						this.addToOpenStack(genericWindow('about', about))}>
+						this.unminimize(genericWindow('about', about))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">about</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(artGallery({openArtGalleryItem: this.openGalleryItem}))}>
+						this.unminimize(artGallery({openArtGalleryItem: this.openGalleryItem}))}>
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">art</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(genericWindow('terminal'))}>
+						this.unminimize(genericWindow('terminal'))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(portfolio())}>
+						this.unminimize(portfolio())}>
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">projects</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.addToOpenStack(musicPlayer(this.state.api_data))}>
+						this.unminimize(musicPlayer(this.state.api_data))}>
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">music</div>
 					</div>
           <div className="icon" onClick={() => 
-						this.addToOpenStack(genericWindow('blog'))}>
+						this.unminimize(genericWindow('blog'))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">blog</div>
 					</div>
