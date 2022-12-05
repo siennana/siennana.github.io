@@ -19,12 +19,13 @@ export type WindowProps = {
     x: number,
     y: number,
   },
+  zIndex?: number | 'auto',
   content: any,
   displayName: string,
   minimize?: (self: any) => void,
   unminimize?: (self: any) => void,
   close?: (self: any) => void,
-  bringWindowToFront?: (key: string, position: {x: number, y: number}) => void,
+  bringWindowToFront?: (key: string) => void,
 };
 
 export type TabProps = {

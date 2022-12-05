@@ -26,8 +26,6 @@ export default class Window extends Component<WindowProps, WindowState> {
 
   childProps = this.props as Pick<WindowProps, 'id' | 'displayName' | 'close'>;
 
-  onStop = () => console.log('STOOOOOOOP');
-
   getOffset = () => {
     return {
       x: this.props.position.x,
@@ -36,12 +34,12 @@ export default class Window extends Component<WindowProps, WindowState> {
   }
 
   onMouseDown = () => {
-    this.props.bringWindowToFront(this.props.id, this.state.position);
+    this.props.bringWindowToFront(this.props.id);
   }
 
   render() {
     return (
-      <Draggable onStop={() => this.onStop()} defaultPosition={this.getOffset()} onStart={() => this.onMouseDown()}>
+      <Draggable defaultPosition={this.getOffset()} onStart={() => this.onMouseDown()}>
         <div className="panel" style={this.props.size}>
           <WindowBar {...this.props as Pick<WindowProps, 'id'| 'displayName' | 'close' | 'minimize' | 'unminimize'>}/>
           <div className="content">

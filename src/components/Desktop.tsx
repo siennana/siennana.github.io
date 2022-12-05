@@ -20,6 +20,7 @@ type DesktopProps = {};
 
 type DesktopState = {
   window_stack: WindowProps[],
+  z_stack: string[],
   tab_stack: TabProps[],
   api_data: {
     top_tracks: any[]
@@ -33,6 +34,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		super(props);
 		this.state = {
 			window_stack: [],
+      z_stack: [],
 			tab_stack: [],
 			api_data: {
         top_tracks: []
@@ -98,9 +100,15 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			return obj.id === key;
 		});
 		if (index === -1) { return }
-		var copy = [...this.state.window_stack];
-		const removedItem  = copy.splice(index, 1)[0];
-		this.setState({window_stack: copy});
+		var wCopy = [...this.state.window_stack];
+		const removedItem  = wCopy.splice(index, 1)[0];
+		this.setState({window_stack: wCopy});
+    // remove from z-index array
+    const zIndex = this.state.z_stack.findIndex(obj => obj === key);
+    var zCopy = [...this.state.z_stack];
+    zCopy.splice(zIndex, 1);
+    this.setState({z_stack: zCopy});
+
     return removedItem;
 	}
 
@@ -114,23 +122,29 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			close: () => this.removeFromOpenStack(app.id),
 			minimize: () => this.minimize(app),
       unminimize: () => this.unminimize(app),
-      bringWindowToFront: () => this.bringWindowToFront(app.id, app.position),
+      bringWindowToFront: () => this.updateZStack(app.id),
 		};
 		this.setState({window_stack: [...this.state.window_stack, item]});
+    this.setState({z_stack: [...this.state.z_stack, item.id]});
 	}
 
-  bringWindowToFront = (key: string, pos: {x: number, y: number}) => {
-    var copy = [...this.state.window_stack];
-    const itemIndex = copy.findIndex(obj => obj.id === key);
-    let item = copy.splice(itemIndex, 1)[0];
-    item.position = pos;
-    this.setState({window_stack: [...copy, item]});
+  // updates z-index of all windows with the key-window having highest z-index
+  updateZStack = (key: string) => {
+    var copy = [...this.state.z_stack];
+    const index = copy.findIndex(obj => obj === key);
+    copy.splice(index, 1);
+    this.setState({z_stack: [...copy, key]});
+    console.log(this.state.z_stack);
   }
 
 	renderOpenWindows = () => {
 		return this.state.window_stack.map((props, index) => {
+      const windowStyle = {
+        'position': 'relative',
+        'zIndex': this.state.z_stack.findIndex(obj => obj === props.id),
+      };
 			return (
-				<Window {...props} key={index}/>
+				<div style={windowStyle as React.CSSProperties} key={index}><Window {...props}/></div>
 			);
 		});
 	}

@@ -16,6 +16,7 @@ export const portfolio = (props?: any): WindowProps => {
       x: 100,
       y: 100,
     },
+    zIndex: 'auto', 
     content: <Portfolio {...props}/>,
     displayName: 'Portfolio',
   }
