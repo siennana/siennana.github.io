@@ -1,5 +1,6 @@
 {
   "name": "portfolio-website",
+  "homepage": "https://siennacodes.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,7 +31,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "echo 'siennacodes.com' > ./build/CNAME && gh-pages -d build"
+    "deploy": "echo 'siennacodes.com' > ./build/CNAME && gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": [

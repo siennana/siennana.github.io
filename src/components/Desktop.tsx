@@ -136,7 +136,6 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     const index = copy.findIndex(obj => obj === key);
     copy.splice(index, 1);
     this.setState({z_stack: [...copy, key]});
-    console.log(this.state.z_stack);
   }
 
 	renderOpenWindows = () => {
