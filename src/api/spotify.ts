@@ -60,7 +60,7 @@ export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
   try {
     const auth_token = await getRefreshToken();
     //get request to SPOTIFY API to access playlist
-    const playlist_url = 'https://api.spotify.com/v1/users/' + `${client_id}/playlists/${playlist_id}/tracks`;
+    const playlist_url = `https://api.spotify.com/v1/users/${client_id}/playlists/${playlist_id}/tracks`;
 
     const response = await axios.get(playlist_url, {
       headers: { 

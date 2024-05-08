@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import { TabProps, WindowProps } from '../../types/window-props';
+import { WindowProps } from '../../types/window-props';
 import '../../pages/Window.css';
 import WindowBar from '../widgets/WindowBar';
 
