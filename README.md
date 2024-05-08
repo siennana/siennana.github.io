@@ -1,5 +1,7 @@
 ## Welcome to my Portfolio
 
+![siennacodes](./public/assets/images/preview.png)
+
 #### I designed my portfolio website around the concept of a traditional desktop
 #### You can check out the site at www.siennacodes.com
 #### This site was built using React
