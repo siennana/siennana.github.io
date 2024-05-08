@@ -38,7 +38,7 @@ export const artGallery = (props?: ArtGalleryProps): WindowProps => {
   }
 };
 
-export const musicPlayer = (props?: MusicPlayerProps): WindowProps => {
+export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
   return {
     id: 'MUSICPLAYER',
     size: {

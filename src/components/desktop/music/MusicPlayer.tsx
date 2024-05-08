@@ -5,13 +5,15 @@ import '../../../pages/MusicPlayer.css'
 
 type MusicPlayerState = {
   currentSongData: any,
+  errorMessage: string,
 };
 
 export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayerState> {
   constructor(props: MusicPlayerProps) {
     super(props);
     this.state = {
-      currentSongData: props.top_tracks[0],
+      currentSongData: props.top_tracks.length > 0 ? props.top_tracks[0] : undefined,
+      errorMessage: props.top_tracks.length > 0 ? '' : 'there was an error fetching song titles',
     }
   }
 
@@ -23,7 +25,7 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
     return this.state.currentSongData.id === this.props.top_tracks[index].id;
   }
 
-  render() {
+  renderMusicPanel = () => {
     return (
       <div className='music-player'>
         <div className='song-list-panel'>
@@ -52,5 +54,17 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
         </div>
       </div>
     );
+  };
+
+  render() {
+    if (this.state.currentSongData) {
+      return (
+        <div>{this.renderMusicPanel()}</div>
+      );
+    } else {
+      return (
+        <div>{this.state.errorMessage}</div>
+      );
+    }
   }
 }

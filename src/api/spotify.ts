@@ -105,5 +105,6 @@ export const getTopTracks = async (): Promise<any> => {
   } catch (error) {
     //on fail, log the error in console
     console.log(error);
+    return [];
   }
 };
