@@ -15,7 +15,7 @@ export type WindowProps = {
     height: string,
     width: string,
   },
-  position: {
+  position?: {
     x: number,
     y: number,
   },

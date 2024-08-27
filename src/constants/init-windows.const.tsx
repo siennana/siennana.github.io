@@ -3,6 +3,7 @@ import MusicPlayer from "../components/desktop/music/MusicPlayer";
 import ArtGallery from "../components/desktop/art/ArtGallery";
 import ArtGalleryItem from "../components/desktop/art/ArtGalleryItem";
 import GenericComponent from "../components/generic/GenericComponent";
+import Cube from "../components/threejs/Cube";
 import { WindowProps, MusicPlayerProps, ArtGalleryItemProps, ArtGalleryProps } from "../types/window-props";
 
 export const portfolio = (props?: any): WindowProps => {
@@ -10,7 +11,7 @@ export const portfolio = (props?: any): WindowProps => {
     id: 'PORTFOLIO',
     size: {
       height: '40rem',
-      width: '50rem',
+      width: '35rem',
     },
     position: {
       x: 100,
@@ -70,18 +71,27 @@ export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
   }
 };
 
+export const cube = (): WindowProps => {
+  return {
+    id: 'CUBE',
+    size: {
+      height: '20rem',
+      width: '20rem',
+    },
+    position: {x: 340, y: 0},
+    content: <Cube />,
+    displayName: 'Cube',
+  }
+};
+
 export const genericWindow = (key: string, mdSource?: string): WindowProps => {
   const defaultContent = <div>Coming Soon!</div>
   const windowContent = mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
   return {
     id: key,
     size: {
-      height: '30rem',
-      width: '25rem',
-    },
-    position: {
-      x: 0,
-      y: 0,
+      height: 'auto',
+      width: '20rem',
     },
     content: windowContent,
     displayName: key,

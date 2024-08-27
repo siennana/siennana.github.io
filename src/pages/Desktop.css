@@ -13,12 +13,17 @@ h1 {
   margin: 0;
 }
 .desktop-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
   position: absolute;
-  margin: 2rem 0 0 1rem;
+  margin: 3rem 0 0 0.75rem;
+  padding: 0.5rem;
+  background: white;
+  border: 2px solid rgba(0, 0, 0, 0.8);
 }
 .icon {
   text-align: center;
-  margin-top: 1.5rem;
   line-height: 0.8rem;
 }
 .icon img {

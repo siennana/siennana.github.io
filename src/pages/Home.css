@@ -5,7 +5,6 @@ html {
 }
 body {
 	font-family: 'Inconsolata', monospace;
-	line-height: 1.3rem;
 }
 span {
 	border-right: .05em solid;

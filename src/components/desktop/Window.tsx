@@ -4,26 +4,18 @@ import { WindowProps } from '../../types/window-props';
 import '../../pages/Window.css';
 import WindowBar from '../widgets/WindowBar';
 
-type WindowState = {
-  position: {
-    x: number,
-    y: number,
-  }
-};
+type WindowState = {};
 
 export default class Window extends Component<WindowProps, WindowState> {
   constructor(props: WindowProps) {
     super(props);
-    this.state = {
-      position: null,
-    }
   }
 
   render() {
     return (
-      <Draggable 
-        onMouseDown={() => this.props.bringWindowToFront(this.props.id)}
-      >
+      <Draggable
+        defaultPosition={this.props.position}
+        onMouseDown={() => this.props.bringWindowToFront(this.props.id)}>
         <div className="panel" style={this.props.size}>
           <WindowBar 
             {...this.props as Pick<WindowProps, 'id'| 'displayName' | 'close' | 'minimize' | 'unminimize'>}

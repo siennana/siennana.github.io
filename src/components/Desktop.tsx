@@ -3,7 +3,14 @@ import '../pages/Desktop.css';
 import { WindowProps, TabProps } from '../types/window-props';
 import Window from './desktop/Window'
 import WindowBar from './widgets/WindowBar';
-import { portfolio, artGallery, artGalleryItem, musicPlayer, genericWindow } from '../constants/init-windows.const';
+import { 
+  portfolio, 
+  artGallery, 
+  artGalleryItem, 
+  musicPlayer, 
+  genericWindow, 
+  cube, 
+} from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
 import about from './desktop/about/about.md';
 
@@ -58,6 +65,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     }, 1000);
 
     this.addToOpenStack(genericWindow('about', about));
+    this.addToOpenStack(cube());
 	}
 
   componentWillUnmount() {
@@ -124,8 +132,10 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
       unminimize: () => this.unminimize(app),
       bringWindowToFront: () => this.updateZStack(app.id),
 		};
-		this.setState({window_stack: [...this.state.window_stack, item]});
-    this.setState({z_stack: [...this.state.z_stack, item.id]});
+		this.setState(prevState => ({
+      window_stack: [...prevState.window_stack, item],
+      z_stack: [...prevState.z_stack, item.id]
+    }));
 	}
 
 
@@ -169,8 +179,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 				<div style={tabDisplay as React.CSSProperties}>
 					{this.renderMinimizedTabs()}
 				</div>
-
-				{this.renderOpenWindows()}
+			  {this.renderOpenWindows()}
 	
 				<div className="desktop-icons">
           <div className="icon" onClick={() => 
