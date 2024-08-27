@@ -33,7 +33,13 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
           <ol>
             {this.props.top_tracks.map((value, index) => {
               return (
-                <li className={classNames({'song-selected' : this.songSelected(index)})} onClick={() => this.onSelectSong(index)} key={index}><div>{value.name}</div></li>
+                <li 
+                  className={classNames({'song-selected' : this.songSelected(index)})} 
+                  onClick={() => this.onSelectSong(index)}
+                  onTouchStart={() => this.onSelectSong(index)}
+                  key={index}>
+                    {value.name}
+                </li>
               )
             })}
           </ol>
@@ -49,7 +55,11 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
             <div>Album Release Date: {this.state.currentSongData.album.release_date}</div>
           </div>
           <div className='music-controls'>
-            <a className='music-button' href={this.state.currentSongData.uri}>Listen on Spotify</a>
+            <a 
+              className='music-button' 
+              href={this.state.currentSongData.uri}>
+                Listen on Spotify
+            </a>
           </div>
         </div>
       </div>

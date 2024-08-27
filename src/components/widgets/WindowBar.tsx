@@ -29,7 +29,9 @@ export default class WindowBar extends Component<TabProps, WindowBarState> {
             -
           </div>
           <div 
-            className="window-button" onClick={this.onClose()}>
+            className="window-button" 
+            onClick={this.onClose()}
+            onTouchStart={this.onClose()}>
             x
           </div>
         </div>

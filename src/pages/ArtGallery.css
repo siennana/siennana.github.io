@@ -1,14 +1,14 @@
 .art-gallery {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   margin: 1rem;
   text-align: center;
   line-height: 0.5rem;
 }
 .gallery-item .folder {
-  width: 6rem;
-  height: 5rem;
+  width: 4rem;
+  height: 3rem;
 }
 .gallery-item:hover {
   cursor: pointer;

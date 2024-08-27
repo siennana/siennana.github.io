@@ -14,7 +14,7 @@ h1 {
 }
 .desktop-icons {
   position: absolute;
-  margin: 3rem 0 0 2rem;
+  margin: 2rem 0 0 1rem;
 }
 .icon {
   text-align: center;
@@ -22,7 +22,7 @@ h1 {
   line-height: 0.8rem;
 }
 .icon img {
-  width: 3rem;
+  width: 2.5rem;
   height: auto;
   transition: all ease-in-out 100ms;
   cursor: pointer;

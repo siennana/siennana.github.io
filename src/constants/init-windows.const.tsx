@@ -26,8 +26,8 @@ export const artGallery = (props?: ArtGalleryProps): WindowProps => {
   return {
     id: 'ARTGALLERY',
     size: {
-      height: '30rem',
-      width: '40rem',
+      height: '20rem',
+      width: '30rem',
     },
     position: {
       x: 50,
@@ -58,8 +58,8 @@ export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
   return {
     id: props.imageSrc,
     size: {
-      height: '35rem',
-      width: '30rem',
+      height: '25rem',
+      width: '20rem',
     },
     position: {
       x: 150,

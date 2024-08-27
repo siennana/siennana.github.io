@@ -13,13 +13,23 @@ const images = [
 ]
 
 export default class ArtGallery extends Component<ArtGalleryProps, {}> {
+ 
+ onSelectItem = (value: any) => {
+  return this.props.openArtGalleryItem(value);
+ }
+
   render() {
     return (
       <div className="art-gallery">
         {images.map((value, index) => {
           return (
             <div key={index} className='gallery-item'>
-              <div className='folder' onClick={() => this.props.openArtGalleryItem(value)}><img src='/assets/images/icons/folder.png'/></div>
+              <div 
+                className='folder' 
+                onClick={() => this.onSelectItem(value)}
+                onTouchStart={() => this.onSelectItem(value)}>
+                  <img src='/assets/images/icons/folder.png'/>
+                </div>
               <div>image {index}</div>
             </div>
           )
