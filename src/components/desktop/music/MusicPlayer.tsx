@@ -28,31 +28,34 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
   renderMusicPanel = () => {
     return (
       <div className='music-player'>
-        <div className='song-list-panel'>
-          <div className='music-player-title'>My Top Songs</div>
-          <ol>
-            {this.props.top_tracks.map((value, index) => {
-              return (
-                <li 
-                  className={classNames({'song-selected' : this.songSelected(index)})} 
-                  onClick={() => this.onSelectSong(index)}
-                  onTouchStart={() => this.onSelectSong(index)}
-                  key={index}>
-                    {value.name}
-                </li>
-              )
-            })}
-          </ol>
+        <div className='music-left-panel'>
+          <div className='music-player-title'>Spotify Top Tracks</div>
+          <div className='song-list-panel'>
+            <ol>
+              {this.props.top_tracks.map((value, index) => {
+                return (
+                  <li 
+                    className={classNames({'song-selected' : this.songSelected(index)})} 
+                    onClick={() => this.onSelectSong(index)}
+                    onTouchStart={() => this.onSelectSong(index)}
+                    key={index}>
+                      {value.name}
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+          <div className='music-player-controls'>
+          </div>
         </div>
         <div className='music-play-panel'>
-          {this.state.currentSongData.name}
           <div className='music-album-cover'>
             <img src={this.state.currentSongData.album.images[0].url}/>
           </div>
           <div className='song-info'>
             <div>Artist: {this.state.currentSongData.artists[0].name}</div>
-            <div>Album Name: {this.state.currentSongData.album.name}</div>
-            <div>Album Release Date: {this.state.currentSongData.album.release_date}</div>
+            <div>Album: {this.state.currentSongData.album.name}</div>
+            <div>Release: {this.state.currentSongData.album.release_date}</div>
           </div>
           <div className='music-controls'>
             <a 
