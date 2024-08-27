@@ -5,7 +5,6 @@ import Window from './desktop/Window'
 import WindowBar from './widgets/WindowBar';
 import { portfolio, artGallery, artGalleryItem, musicPlayer, genericWindow } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
-
 import about from './desktop/about/about.md';
 
 const tabDisplay = {
@@ -103,6 +102,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		if (index === -1) { return }
 		var wCopy = [...this.state.window_stack];
 		const removedItem  = wCopy.splice(index, 1)[0];
+    console.log(wCopy);
 		this.setState({window_stack: wCopy});
     // remove from z-index array
     const zIndex = this.state.z_stack.findIndex(obj => obj === key);
@@ -136,25 +136,26 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
     const index = copy.findIndex(obj => obj === key);
     copy.splice(index, 1);
     this.setState({z_stack: [...copy, key]});
-    console.log(this.state.z_stack);
   }
 
 	renderOpenWindows = () => {
 		return this.state.window_stack.map((props, index) => {
       const windowStyle = {
-        'position': 'relative',
         'zIndex': this.state.z_stack.findIndex(obj => obj === props.id),
+        'position': 'relative'
       };
 			return (
-				<div style={windowStyle as React.CSSProperties} key={index}><Window {...props}/></div>
-			);
+			  <div style={windowStyle as React.CSSProperties} key={props.id}>
+          <Window {...props} />
+        </div>
+      );
 		});
 	}
 
 	renderMinimizedTabs = () => {
 		return this.state.tab_stack.map((props, index) => {
 			return (
-				<WindowBar {...props} key={index}/>
+				<WindowBar {...props} key={props.id} />
 			);
 		});
 	}

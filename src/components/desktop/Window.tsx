@@ -4,11 +4,6 @@ import { WindowProps } from '../../types/window-props';
 import '../../pages/Window.css';
 import WindowBar from '../widgets/WindowBar';
 
-const posOffset = {
-  x: '10%',
-  y: '20%',
-};
-
 type WindowState = {
   position: {
     x: number,
@@ -20,28 +15,19 @@ export default class Window extends Component<WindowProps, WindowState> {
   constructor(props: WindowProps) {
     super(props);
     this.state = {
-      position: this.props.position,
+      position: null,
     }
-  }
-
-  childProps = this.props as Pick<WindowProps, 'id' | 'displayName' | 'close'>;
-
-  getOffset = () => {
-    return {
-      x: this.props.position.x,
-      y: this.props.position.y,
-    }
-  }
-
-  onMouseDown = () => {
-    this.props.bringWindowToFront(this.props.id);
   }
 
   render() {
     return (
-      <Draggable defaultPosition={this.getOffset()} onStart={() => this.onMouseDown()}>
+      <Draggable 
+        onMouseDown={() => this.props.bringWindowToFront(this.props.id)}
+      >
         <div className="panel" style={this.props.size}>
-          <WindowBar {...this.props as Pick<WindowProps, 'id'| 'displayName' | 'close' | 'minimize' | 'unminimize'>}/>
+          <WindowBar 
+            {...this.props as Pick<WindowProps, 'id'| 'displayName' | 'close' | 'minimize' | 'unminimize'>}
+          />
           <div className="content">
             {this.props.content}
           </div>
