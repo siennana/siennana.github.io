@@ -5,41 +5,43 @@ import { SpotifyTracksResponseItem } from '../types/spotify';
 
 const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
-const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
+const auth_token = 
+  Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
 const refresh_token = process.env.REACT_APP_SPOTIFY_REFRESH_TOKEN;
+const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
-// returns spotify authentification token
-// this token does not allow user access
+/**
+* returns spotify authentification token (client credentials flow)
+*/
 export const getSpotifyAuth = async () => {
   try{
     // make post request to SPOTIFY API for access token, sending relavent info
-    const token_url = 'https://accounts.spotify.com/api/token';
     const data = stringify({'grant_type':'client_credentials'});
 
-    const response = await axios.post(token_url, data, {
+    const response = await axios.post(SPOTIFY_TOKEN_URL, data, {
       headers: { 
         'Authorization': `Basic ${auth_token}`,
         'Content-Type': 'application/x-www-form-urlencoded' 
       }
     });
     // return access token
-    return response.data.access_token;   
+    return response.data.access_token;
   } catch (error){
-    // on fail, log the error in console
     console.log(error);
   }
 };
 
-// returns a refreshed access token (authorization code flow)
+/**
+* returns a refreshed access token (authorization code flow)
+*/
 export const getRefreshToken = async () => {
   try {
-    const token_url = 'https://accounts.spotify.com/api/token';
     const data = stringify({
       'grant_type':'refresh_token',
       'refresh_token':`${refresh_token}`
     });
 
-    const response = await axios.post(token_url, data, {
+    const response = await axios.post(SPOTIFY_TOKEN_URL, data, {
       headers: { 
         'Authorization': `Basic ${auth_token}`,
         'Content-Type': 'application/x-www-form-urlencoded' 
@@ -48,7 +50,6 @@ export const getRefreshToken = async () => {
     // return access token
     return response.data.access_token;
   } catch (error) {
-    // on fail, log the error in console
     console.log(error);
   }
 };
@@ -77,11 +78,13 @@ export const getPlaylist = async (): Promise<SpotifyTracksResponseItem[]> => {
     return data;
 
   } catch (error) {
-    // on fail, log the error in console
     console.log(error);
   }
 };
 
+/**
+ * requires auth scope user-top-read
+ */
 export const getTopTracks = async (): Promise<any> => {
   try {
     const auth_token = await getRefreshToken();
@@ -103,7 +106,6 @@ export const getTopTracks = async (): Promise<any> => {
     return data;
 
   } catch (error) {
-    //on fail, log the error in console
     console.log(error);
     return [];
   }
