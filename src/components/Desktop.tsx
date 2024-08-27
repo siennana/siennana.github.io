@@ -102,7 +102,6 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 		if (index === -1) { return }
 		var wCopy = [...this.state.window_stack];
 		const removedItem  = wCopy.splice(index, 1)[0];
-    console.log(wCopy);
 		this.setState({window_stack: wCopy});
     // remove from z-index array
     const zIndex = this.state.z_stack.findIndex(obj => obj === key);

@@ -9,15 +9,27 @@ export default class WindowBar extends Component<TabProps, WindowBarState> {
     super(props);
   }
 
+  onMinimize = () => {
+    return this.props.minimized ? this.props.unminimize : this.props.minimize;
+  }
+
+  onClose = () => {
+    return this.props.close;
+  }
+
   render() {
     return (
       <div className={this.props.minimized ? 'top_bar minimized' : 'top_bar'}>
         <div className="descriptor">{this.props.displayName}</div>
         <div className="buttons">
-          <div className="window-button" onClick={this.props.minimized ? this.props.unminimize : this.props.minimize}>
+          <div 
+            className="window-button" 
+            onClick={this.onMinimize()} 
+            onTouchStart={this.onMinimize()}>
             -
           </div>
-          <div className="window-button" onClick={this.props.close}>
+          <div 
+            className="window-button" onClick={this.onClose()}>
             x
           </div>
         </div>
