@@ -7,7 +7,8 @@ import {
   portfolio, 
   artGallery, 
   artGalleryItem, 
-  musicPlayer, 
+  musicPlayer,
+  terminal,
   genericWindow, 
   cube, 
 } from '../constants/init-windows.const';
@@ -193,7 +194,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<div className="icon-text">art</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.unminimize(genericWindow('terminal'))}>
+						this.unminimize(terminal())}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">terminal</div>
 					</div>
@@ -207,7 +208,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">music</div>
 					</div>
-          <div className="icon" onClick={() => 
+          <div className="icon" style={{display: 'none'}} onClick={() => 
 						this.unminimize(genericWindow('blog'))}>
           	<img src="/assets/images/icons/folder.png"/>
 						<div className="icon-text">blog</div>

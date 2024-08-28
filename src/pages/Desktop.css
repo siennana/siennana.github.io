@@ -4,7 +4,7 @@ body {
 }
 body {
   background-color: white;
-  background-size: 35px 35px;
+  background-size: 30px 30px;
   background-image:
     linear-gradient(to right, rgba(0, 0, 255, 0.3) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 255, 0.3) 1px, transparent 1px);
@@ -18,16 +18,18 @@ h1 {
   gap: 1rem;
   position: absolute;
   margin: 3rem 0 0 0.75rem;
-  padding: 0.5rem;
+  padding: 0.4rem;
   background: white;
   border: 2px solid rgba(0, 0, 0, 0.8);
 }
 .icon {
   text-align: center;
-  line-height: 0.8rem;
+  line-height: 0.5rem;
+  font-size: 0.8rem;
+  width: 3.5rem;
 }
 .icon img {
-  width: 2.5rem;
+  width: 2.3rem;
   height: auto;
   transition: all ease-in-out 100ms;
   cursor: pointer;

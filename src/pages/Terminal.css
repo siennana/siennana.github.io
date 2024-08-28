@@ -1,0 +1,24 @@
+.terminal-container {
+  background-color: black;
+  color: #00ff00;
+  padding: 1rem;
+  margin: 0 auto;
+  height: 100%;
+}
+.terminal-output {
+  margin-bottom: 10px;
+}
+.terminal-entry {
+  margin-bottom: 5px;
+  white-space: pre-wrap; /* Ensures line breaks are preserved */
+}
+.terminal-prompt {
+  color: #00ff00;
+}
+.terminal-input input {
+  background: transparent;
+  border: none;
+  color: #00ff00;
+  outline: none;
+}
+

@@ -3,6 +3,7 @@ import MusicPlayer from "../components/desktop/music/MusicPlayer";
 import ArtGallery from "../components/desktop/art/ArtGallery";
 import ArtGalleryItem from "../components/desktop/art/ArtGalleryItem";
 import GenericComponent from "../components/generic/GenericComponent";
+import Terminal from "../components/desktop/terminal/Terminal";
 import Cube from "../components/threejs/Cube";
 import { WindowProps, MusicPlayerProps, ArtGalleryItemProps, ArtGalleryProps } from "../types/window-props";
 
@@ -70,6 +71,18 @@ export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
     displayName: props.imageSrc,
   }
 };
+
+export const terminal = (): WindowProps => {
+  return {
+    id: 'TERMINAL',
+    size: {
+      height: '20rem',
+      width: '25rem',
+    },
+    content: <Terminal />,
+    displayName: 'terminal',
+  }
+}
 
 export const cube = (): WindowProps => {
   return {
