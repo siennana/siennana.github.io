@@ -5,11 +5,17 @@ import ArtGalleryItem from "../components/desktop/art/ArtGalleryItem";
 import GenericComponent from "../components/generic/GenericComponent";
 import Terminal from "../components/desktop/terminal/Terminal";
 import Cube from "../components/threejs/Cube";
-import { WindowProps, MusicPlayerProps, ArtGalleryItemProps, ArtGalleryProps } from "../types/window-props";
+import { 
+  WindowProps, 
+  MusicPlayerProps, 
+  ArtGalleryItemProps, 
+  ArtGalleryProps,
+  TerminalProps
+} from "../types/window-props";
 
 export const portfolio = (props?: any): WindowProps => {
   return {
-    id: 'PORTFOLIO',
+    id: 'projects',
     size: {
       height: '40rem',
       width: '35rem',
@@ -20,13 +26,29 @@ export const portfolio = (props?: any): WindowProps => {
     },
     zIndex: 'auto', 
     content: <Portfolio {...props}/>,
-    displayName: 'Portfolio',
+    displayName: 'Projects',
+  }
+};
+
+export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
+  return {
+    id: 'music.exe',
+    size: {
+      height: '25rem',
+      width: '35rem',
+    },
+    position: {
+      x: 150,
+      y: 150,
+    },
+    content: <MusicPlayer {...props}/>,
+    displayName: 'music.exe',
   }
 };
 
 export const artGallery = (props?: ArtGalleryProps): WindowProps => {
   return {
-    id: 'ARTGALLERY',
+    id: 'art',
     size: {
       height: '20rem',
       width: '30rem',
@@ -37,22 +59,6 @@ export const artGallery = (props?: ArtGalleryProps): WindowProps => {
     },
     content: <ArtGallery {...props}/>,
     displayName: 'Art Gallery',
-  }
-};
-
-export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
-  return {
-    id: 'MUSICPLAYER',
-    size: {
-      height: '25rem',
-      width: '35rem',
-    },
-    position: {
-      x: 150,
-      y: 150,
-    },
-    content: <MusicPlayer {...props}/>,
-    displayName: 'Music Player',
   }
 };
 
@@ -72,34 +78,35 @@ export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
   }
 };
 
-export const terminal = (): WindowProps => {
+export const terminal = (props: TerminalProps): WindowProps => {
   return {
-    id: 'TERMINAL',
+    id: 'terminal.exe',
     size: {
       height: '20rem',
       width: '25rem',
     },
-    content: <Terminal />,
-    displayName: 'terminal',
+    content: <Terminal {...props}/>,
+    displayName: 'terminal.exe',
   }
 }
 
 export const cube = (): WindowProps => {
   return {
-    id: 'CUBE',
+    id: 'cube.exe',
     size: {
       height: '20rem',
       width: '20rem',
     },
     position: {x: 340, y: 0},
     content: <Cube />,
-    displayName: 'Cube',
+    displayName: 'cube.exe',
   }
 };
 
 export const genericWindow = (key: string, mdSource?: string): WindowProps => {
   const defaultContent = <div>Coming Soon!</div>
-  const windowContent = mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
+  const windowContent = 
+    mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
   return {
     id: key,
     size: {

@@ -15,7 +15,7 @@ const images = [
 export default class ArtGallery extends Component<ArtGalleryProps, {}> {
  
  onSelectItem = (value: any) => {
-  return this.props.openArtGalleryItem(value);
+  return this.props.openWindow(value);
  }
 
   render() {

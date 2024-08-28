@@ -14,14 +14,15 @@ export default class MusicPlayer extends Component<MusicPlayerProps, MusicPlayer
     super(props);
     this.state = {
       currentSongData: props.top_tracks.length > 0 ? props.top_tracks[0] : undefined,
-      errorMessage: props.top_tracks.length > 0 ? '' : 'there was an error fetching song titles',
+      errorMessage: props.top_tracks.length > 0 ? 
+        '' : 'there was an error fetching song titles',
     };
     this.audioRef = createRef();
   }
 
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentSongData.preview_url != this.state.currentSongData.preview_url
+    if (prevState.currentSongData.preview_url !== this.state.currentSongData.preview_url
     && this.audioRef.current) {
       this.audioRef.current.load();
     }

@@ -1,15 +1,13 @@
 .terminal-container {
-  background-color: black;
+  background-color: #171717;
   color: #00ff00;
   padding: 1rem;
   margin: 0 auto;
-  height: 100%;
-}
-.terminal-output {
-  margin-bottom: 10px;
+  min-height: 100%;
+  font-size: small;
 }
 .terminal-entry {
-  margin-bottom: 5px;
+  margin-bottom: 1px;
   white-space: pre-wrap; /* Ensures line breaks are preserved */
 }
 .terminal-prompt {
@@ -20,5 +18,8 @@
   border: none;
   color: #00ff00;
   outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
 }
 

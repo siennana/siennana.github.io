@@ -15,7 +15,7 @@ h1 {
 .desktop-icons {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 1.2rem;
   position: absolute;
   margin: 3rem 0 0 0.75rem;
   padding: 0.4rem;
@@ -26,7 +26,6 @@ h1 {
   text-align: center;
   line-height: 0.5rem;
   font-size: 0.8rem;
-  width: 3.5rem;
 }
 .icon img {
   width: 2.3rem;

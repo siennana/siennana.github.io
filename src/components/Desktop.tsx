@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject, useRef } from 'react';
 import '../pages/Desktop.css';
 import { WindowProps, TabProps } from '../types/window-props';
 import Window from './desktop/Window'
@@ -35,8 +35,11 @@ type DesktopState = {
   date: Date
 };
 
+const ICON_FOLDER = '/assets/images/icons/folder.png';
+
 export default class Desktop extends Component<DesktopProps, DesktopState> {
-  timer;
+  private timer;
+  private applications: Record<string, WindowProps>;
 	constructor(props: DesktopProps) {
 		super(props);
 		this.state = {
@@ -48,6 +51,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
       },
       date: new Date()
 		}
+    this.applications = {};
 	}
 
 	componentDidMount() {
@@ -57,6 +61,15 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
           top_tracks: res
         }
       });
+      this.applications = {
+        ['README.md']: genericWindow('README.md', about),
+        ['terminal.exe']: terminal({openWindow: this.openWindow}),
+        ['music.exe']: musicPlayer(this.state.api_data),
+        ['art']: artGallery({openWindow: this.openGalleryItem}),
+        ['projects']: portfolio(),
+      };
+      this.openWindow('README.md');
+      this.addToOpenStack(cube());
     });
 
     this.timer = setInterval(() => {
@@ -64,9 +77,6 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
         date: new Date()
       });
     }, 1000);
-
-    this.addToOpenStack(genericWindow('about', about));
-    this.addToOpenStack(cube());
 	}
 
   componentWillUnmount() {
@@ -171,7 +181,11 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	}
 
 	openGalleryItem = (imageSrc: string) => {
-    this.addToOpenStack(artGalleryItem({imageSrc: imageSrc}));
+    this.unminimize(artGalleryItem({imageSrc: imageSrc}));
+  }
+
+  openWindow = (key: string) => {
+   this.unminimize((this.applications[key]));
   }
 
 	render() {
@@ -184,33 +198,33 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	
 				<div className="desktop-icons">
           <div className="icon" onClick={() => 
-						this.unminimize(genericWindow('about', about))}>
-          	<img src="/assets/images/icons/folder.png"/>
-						<div className="icon-text">about</div>
+						this.openWindow('README.md')}>
+          	<img src={ICON_FOLDER}/>
+						<div className="icon-text">README.md</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.unminimize(artGallery({openArtGalleryItem: this.openGalleryItem}))}>
-						<img src="/assets/images/icons/folder.png"/>
+            this.openWindow('art')}>
+						<img src={ICON_FOLDER}/>
 						<div className="icon-text">art</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.unminimize(terminal())}>
-          	<img src="/assets/images/icons/folder.png"/>
-						<div className="icon-text">terminal</div>
+						this.openWindow('terminal.exe')}>
+          	<img src={ICON_FOLDER}/>
+						<div className="icon-text">terminal.exe</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.unminimize(portfolio())}>
-						<img src="/assets/images/icons/folder.png"/>
+						this.openWindow('projects')}>
+						<img src={ICON_FOLDER}/>
 						<div className="icon-text">projects</div>
 					</div>
 					<div className="icon" onClick={() => 
-						this.unminimize(musicPlayer(this.state.api_data))}>
-						<img src="/assets/images/icons/folder.png"/>
-						<div className="icon-text">music</div>
+						this.openWindow('music.exe')}>
+						<img src={ICON_FOLDER}/>
+						<div className="icon-text">music.exe</div>
 					</div>
           <div className="icon" style={{display: 'none'}} onClick={() => 
 						this.unminimize(genericWindow('blog'))}>
-          	<img src="/assets/images/icons/folder.png"/>
+          	<img src={ICON_FOLDER}/>
 						<div className="icon-text">blog</div>
 					</div>
 				</div>

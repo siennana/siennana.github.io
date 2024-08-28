@@ -38,10 +38,14 @@ export type TabProps = {
 };
 
 export type ArtGalleryProps = {
-  openArtGalleryItem: (imageSrc: string) => void,
+  openWindow: (imageSrc: string) => void,
 };
 
 export type ArtGalleryItemProps = {
   imageSrc: string,
 };
+
+export type TerminalProps = {
+  openWindow: (key: string) => void,
+}
 

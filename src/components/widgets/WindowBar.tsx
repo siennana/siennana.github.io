@@ -5,9 +5,6 @@ import '../../pages/WindowBar.css';
 type WindowBarState = {};
 
 export default class WindowBar extends Component<TabProps, WindowBarState> {
-  constructor(props: TabProps) {
-    super(props);
-  }
 
   onMinimize = () => {
     return this.props.minimized ? this.props.unminimize : this.props.minimize;
