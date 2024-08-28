@@ -44,7 +44,7 @@ export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
     id: 'MUSICPLAYER',
     size: {
       height: '25rem',
-      width: '32rem',
+      width: '35rem',
     },
     position: {
       x: 150,
