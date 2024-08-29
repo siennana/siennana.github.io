@@ -6,22 +6,32 @@ interface TerminalState {
   history: string[];
   currentInput: string;
   location: string;
+  prompt: string;
+  isLoading: boolean;
+  loadingProgress: number;
 }
 
 const COMMAND_NOT_FOUND = 'command not found';
 const directories = {
   root: {
-    children: ['README.md', 'art', 'terminal.exe', 'projects', 'music.exe']
+    children: ['README.md', 'art', 'terminal.exe', 'projects', 'music.exe', 'virus.exe'],
+    hidden: ['secret_directory']
   } 
 };
 
+const prompts = ['root $ ', 'are you sure? '];
+
 export default class Terminal extends Component<TerminalProps, TerminalState> {
+  private loadingInterval: NodeJS.Timeout | null = null;
   constructor(props) {
     super(props);
     this.state = {
       history: [],
       currentInput: '',
-      location: 'root'
+      location: 'root',
+      prompt: prompts[0],
+      isLoading: false,
+      loadingProgress: 0,
     };
   }
 
@@ -36,42 +46,113 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
   };
 
   processCommand = () => {
-    const { currentInput, history, location } = this.state;
+    const { currentInput, history, prompt } = this.state;
     if (currentInput.trim()) {
       const output = this.getOutput(currentInput.trim().toLowerCase());
-      this.setState({
-        history: [...history, `${location} $ ${currentInput}`, output],
+      this.setState((prev) => ({
+        history: [...prev.history, `${prompt}${currentInput}`, output],
         currentInput: '',
-      });
+      }));
+      if (this.state.prompt === prompts[1]) {
+        this.virus();
+      }
     }
   };
 
-  ls = (location: string) => {
-    return directories[location].children.join('\t');
+  clear = () => {
+    this.setState({
+      history: []
+    });
+  };
+
+  ls = (location: string, hidden: boolean) => {
+    let dirs = directories[location].children;
+    if (hidden) {
+      dirs = [...dirs, ...directories[location].hidden]
+    }
+    return dirs.join('\t');
   };
 
   cd = (newLocation: string) => {
     
-  }
+  };
 
-  getOutput = (command: string): string => {
-    const { location } = this.state;
-    switch(command) {
-      case('ls'):
-        return this.ls(location);
-      default:
-        if (/^.*\.exe$/i.test(command) 
-          && directories[location].children.includes(command)) {
-          this.props.openWindow(command)
-          return `opening ${command}`;
-        } else {
-          return COMMAND_NOT_FOUND;
+  virus = () => {
+    this.startLoadingAnimation();
+  };
+
+  startLoadingAnimation = () => {
+    this.setState((prev) => ({
+      history: [...prev.history, 'Installing virus.exe...'],
+      currentInput: '',
+      isLoading: true,
+      loadingProgress: 0,
+      prompt: prompts[0], // Reset prompt after installation
+    }));
+    this.loadingInterval = setInterval(() => {
+      this.setState(prev => {
+        const newProgress = Math.min(prev.loadingProgress + 5, 100);
+        const newHistory = [...prev.history];
+        newHistory[newHistory.length - 1] = 
+          `Installing virus.exe... [${'#'.repeat(newProgress / 5)}${' '.repeat(20 
+          - newProgress / 5)}] ${newProgress}%`;
+
+        if (newProgress === 100) {
+          if (this.loadingInterval) {
+            clearInterval(this.loadingInterval);
+          }
+          return {
+            history: newHistory,
+            isLoading: false,
+            loadingProgress: 0,
+          };
         }
+        return {
+          history: newHistory,
+          isLoading: true,
+          loadingProgress: newProgress,
+        };
+      });
+    }, 250); // Update every 250ms for smoother animation
+  };
+
+  getOutput = (input: string): string => {
+    const { prompt, history, currentInput } = this.state;
+    const parsedCommands = input.split(' ');
+    const command = parsedCommands[0];
+    if (prompt === prompts[0]) {
+      const { location } = this.state;
+      switch(command) {
+        case('clear'):
+          this.clear();
+          break;
+        case('ls'):
+          const hidden = parsedCommands[1] === '-a';
+          return this.ls(location, hidden);
+        case('virus.exe'):
+          this.setState({prompt: prompts[1]});
+          return '';
+        default:
+          if (/^.*\.exe$/i.test(command)) {
+            try {
+              this.props.openWindow(command)
+              return `opening ${command}`;
+            } catch {
+              return `no application named ${command}`;
+            }
+          } else {
+            return COMMAND_NOT_FOUND;
+          }
+      }
+    } else if (prompt === prompts[1]) {
+      if(command === 'n' || command === 'no') {
+        return 'too bad';
+      }
     }
   }
 
   render() {
-    const { history, currentInput } = this.state;
+    const { history, currentInput, isLoading } = this.state;
 
     return (
       <div className="terminal-container">
@@ -82,16 +163,18 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
             </div>
           ))}
         </div>
-        <div className="terminal-input">
-          <span className="terminal-prompt">{this.state.location} $ </span>
-          <input
-            type="text"
-            value={currentInput}
-            onChange={this.handleInputChange}
-            onKeyPress={this.handleKeyPress}
-            autoFocus
-          />
-        </div>
+        {!isLoading && (
+          <div className="terminal-input">
+            <span className="terminal-prompt">{this.state.prompt}</span>
+            <input
+              type="text"
+              value={currentInput}
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleKeyPress}
+              autoFocus
+            />
+          </div>
+        )}
       </div>
     );
   }
