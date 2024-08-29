@@ -1,5 +1,6 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import { TerminalProps } from '../../../types/window-props';
+import { artSource } from '../../../constants/file-directories.const';
 import '../../../pages/Terminal.css';
 
 interface TerminalState {
@@ -9,19 +10,48 @@ interface TerminalState {
   prompt: string;
   isLoading: boolean;
   loadingProgress: number;
+  directorySubTree: any;
 }
 
 const COMMAND_NOT_FOUND = 'command not found';
-const directories = {
+
+type DirectoryTree = Record<string, Node>;
+type Node = {
+  path: string,
+  children?: string[],
+  hidden?: string[],
+  parent: string,
+  subTree?: DirectoryTree,
+
+};
+
+const directoryTree: DirectoryTree = {
   root: {
+    path: 'root',
     children: ['README.md', 'art', 'terminal.exe', 'projects', 'music.exe', 'virus.exe'],
     hidden: ['secret_directory'],
-    ['projects']: {},
-    ['art']: {}
+    parent: 'root',
+    subTree: {
+      ['projects']: {
+        path: 'root/projects',
+        children: [],
+        parent: 'root'
+      },
+      ['art']: {
+        path: 'root/art',
+        children: artSource.map((str) => str.split('/').pop()),
+        parent: 'root'
+      },
+      ['secret_directory']: {
+        path: 'root/secret_directory',
+        children: ['actual_virus.exe'],
+        parent: 'root',
+      },
+    }
   }
 };
 
-const prompts = ['root $ ', 'are you sure? '];
+const prompts = ['$ ', 'are you sure? '];
 
 export default class Terminal extends Component<TerminalProps, TerminalState> {
   private loadingInterval: NodeJS.Timeout | null = null;
@@ -31,9 +61,10 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
       history: [],
       currentInput: '',
       location: 'root',
-      prompt: prompts[0],
+      prompt: `root ${prompts[0]}`,
       isLoading: false,
       loadingProgress: 0,
+      directorySubTree: directoryTree['root'],
     };
   }
 
@@ -62,21 +93,43 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
   };
 
   clear = () => {
-    this.setState({
-      history: []
-    });
+    this.setState({history: []});
   };
 
   ls = (location: string, hidden: boolean) => {
-    let dirs = directories[location].children;
+    let dirs = this.state.directorySubTree.children;
     if (hidden) {
-      dirs = [...dirs, ...directories[location].hidden]
+      dirs = [...dirs, ...this.state.directorySubTree.hidden]
     }
     return dirs.join('\t');
   };
 
   cd = (newLocation: string) => {
-    
+    this.setState(prev => {
+      const backward = newLocation === '..';
+      const route = backward ?
+        prev.directorySubTree.parent : newLocation;
+      const pathArr = prev.directorySubTree.path.split('/');
+      if (backward) {
+        pathArr.pop();
+      } else {
+        pathArr.push(route);
+      }
+      return {
+        location: route, 
+        prompt: `${route} ${prompts[0]}`,
+        directorySubTree: this.getSubTree(pathArr, directoryTree['root'], 0),
+      }
+    });
+  };
+
+  getSubTree = (ids: string[], node: Node, index: number): Node => {
+    if (index === ids.length - 1 || ids.length == 0) {
+      return node;
+    };
+    index++;
+    const nextNode = node.subTree[ids[index]];
+    return this.getSubTree(ids, nextNode, index);
   };
 
   virus = () => {
@@ -91,7 +144,7 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
       currentInput: '',
       isLoading: true,
       loadingProgress: 0,
-      prompt: prompts[0], // Reset prompt after installation
+      prompt: `${this.state.location} ${prompts[0]}`, // Reset prompt after installation
     }));
     this.loadingInterval = setInterval(() => {
       this.setState(prev => {
@@ -124,7 +177,7 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
     const { prompt, history, currentInput } = this.state;
     const parsedCommands = input.split(' ');
     const command = parsedCommands[0];
-    if (prompt === prompts[0]) {
+    if (prompt !== prompts[1]) {
       const { location } = this.state;
       switch(command) {
         case('clear'):
@@ -133,9 +186,12 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
         case('ls'):
           const hidden = parsedCommands[1] === '-a';
           return this.ls(location, hidden);
+        case ('cd'):
+          this.cd(parsedCommands[1] ?? 'root');
+          break;
         case('virus.exe'):
-          this.setState({prompt: prompts[1]});
-          return '';
+          this.setState(prev => ({prompt: prompts[1]}));
+          break;
         default:
           if (/^.*\.exe$/i.test(command)) {
             try {
