@@ -1,25 +1,23 @@
-.art-gallery {
+.file-window {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   margin: 1rem;
   text-align: center;
   line-height: 0.5rem;
+  font-size: 0.8rem;
 }
-.gallery-item .folder {
-  width: 4rem;
-  height: 3rem;
-}
-.gallery-item:hover {
+.file-item:hover {
   cursor: pointer;
 }
-.gallery-item img {
-  height: 100%;
+.file-item img {
+  width: 2.3rem;
+  height: auto;
   transition: all ease-in-out 100ms;
 }
-.gallery-item img:hover {
+.file-item img:hover {
   transform: translateY(-3px);
 }
-.gallery-item p {
+.file-item p {
   margin: 0;
 }

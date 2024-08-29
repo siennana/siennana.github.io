@@ -5,15 +5,16 @@ import Window from './desktop/Window'
 import WindowBar from './widgets/WindowBar';
 import { 
   portfolio, 
-  artGallery, 
-  artGalleryItem, 
   musicPlayer,
   terminal,
-  genericWindow, 
+  genericFileWindow,
+  genericWindow,
+  genericImageWindow,
   cube, 
 } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
 import about from './desktop/about/about.md';
+import { artSource } from './../constants/file-directories.const';
 
 const tabDisplay = {
 	display: 'flex',
@@ -65,7 +66,10 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
         ['README.md']: genericWindow('README.md', about),
         ['terminal.exe']: terminal({openWindow: this.openWindow}),
         ['music.exe']: musicPlayer(this.state.api_data),
-        ['art']: artGallery({openWindow: this.openGalleryItem}),
+        ['art']: genericFileWindow('art', {
+          openWindow: this.openGalleryItem,
+          source: artSource,
+        }),
         ['projects']: portfolio(),
       };
       this.openWindow('README.md');
@@ -181,7 +185,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 	}
 
 	openGalleryItem = (imageSrc: string) => {
-    this.unminimize(artGalleryItem({imageSrc: imageSrc}));
+    this.unminimize(genericImageWindow(imageSrc, {source: imageSrc}));
   }
 
   openWindow = (key: string) => {

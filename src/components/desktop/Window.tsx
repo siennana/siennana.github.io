@@ -16,7 +16,7 @@ export default class Window extends Component<WindowProps, WindowState> {
       <Draggable
         defaultPosition={this.props.position}
         onMouseDown={() => this.props.bringWindowToFront(this.props.id)}>
-        <div className="panel" style={this.props.size}>
+        <div className="panel" style={this.props.style}>
           <WindowBar 
             {...this.props as Pick<WindowProps, 'id'| 'displayName' | 'close' | 'minimize' | 'unminimize'>}
           />

@@ -1,22 +1,63 @@
 import Portfolio from "../components/desktop/portfolio/Portfolio";
 import MusicPlayer from "../components/desktop/music/MusicPlayer";
-import ArtGallery from "../components/desktop/art/ArtGallery";
-import ArtGalleryItem from "../components/desktop/art/ArtGalleryItem";
 import GenericComponent from "../components/generic/GenericComponent";
 import Terminal from "../components/desktop/terminal/Terminal";
+import GenericFileWindow from '../components/generic/GenericFileWindow';
+import GenericImgWindow from '../components/generic/GenericImgWindow';
 import Cube from "../components/threejs/Cube";
 import { 
   WindowProps, 
   MusicPlayerProps, 
-  ArtGalleryItemProps, 
-  ArtGalleryProps,
-  TerminalProps
+  TerminalProps,
+  FileWindowProps,
+  ImageWindowProps,
 } from "../types/window-props";
+import React from 'react';
+
+function genericProps<E> (
+  key: string, 
+  component: any,
+  props: E,
+  overrides?: Partial<WindowProps>,
+): WindowProps {
+  return {
+    id: key,
+    style: {
+      height: 'auto',
+      width: '20rem',
+    },
+    content: React.createElement(component, props),
+    displayName: key
+  }
+};
+
+export const genericFileWindow = (key: string, props: FileWindowProps): WindowProps => {
+  return genericProps<FileWindowProps>(key, GenericFileWindow, props);
+};
+
+export const genericImageWindow = (key: string, props: ImageWindowProps): WindowProps => {
+  return genericProps<ImageWindowProps>(key, GenericImgWindow, props);
+};
+
+export const genericWindow = (key: string, mdSource?: string): WindowProps => {
+  const defaultContent = <div>Coming Soon!</div>
+  const windowContent = 
+    mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
+  return {
+    id: key,
+    style: {
+      height: 'auto',
+      width: '20rem',
+    },
+    content: windowContent,
+    displayName: key,
+  }
+};
 
 export const portfolio = (props?: any): WindowProps => {
   return {
     id: 'projects',
-    size: {
+    style: {
       height: '40rem',
       width: '35rem',
     },
@@ -33,7 +74,7 @@ export const portfolio = (props?: any): WindowProps => {
 export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
   return {
     id: 'music.exe',
-    size: {
+    style: {
       height: '25rem',
       width: '35rem',
     },
@@ -46,42 +87,10 @@ export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
   }
 };
 
-export const artGallery = (props?: ArtGalleryProps): WindowProps => {
-  return {
-    id: 'art',
-    size: {
-      height: '20rem',
-      width: '30rem',
-    },
-    position: {
-      x: 50,
-      y: 50,
-    },
-    content: <ArtGallery {...props}/>,
-    displayName: 'Art Gallery',
-  }
-};
-
-export const artGalleryItem = (props?: ArtGalleryItemProps): WindowProps => {
-  return {
-    id: props.imageSrc,
-    size: {
-      height: '25rem',
-      width: '20rem',
-    },
-    position: {
-      x: 150,
-      y: 80,
-    },
-    content: <ArtGalleryItem {...props}/>,
-    displayName: props.imageSrc,
-  }
-};
-
 export const terminal = (props: TerminalProps): WindowProps => {
   return {
     id: 'terminal.exe',
-    size: {
+    style: {
       height: '20rem',
       width: '25rem',
     },
@@ -93,7 +102,7 @@ export const terminal = (props: TerminalProps): WindowProps => {
 export const cube = (): WindowProps => {
   return {
     id: 'cube.exe',
-    size: {
+    style: {
       height: '20rem',
       width: '20rem',
     },
@@ -103,17 +112,3 @@ export const cube = (): WindowProps => {
   }
 };
 
-export const genericWindow = (key: string, mdSource?: string): WindowProps => {
-  const defaultContent = <div>Coming Soon!</div>
-  const windowContent = 
-    mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
-  return {
-    id: key,
-    size: {
-      height: 'auto',
-      width: '20rem',
-    },
-    content: windowContent,
-    displayName: key,
-  }
-};

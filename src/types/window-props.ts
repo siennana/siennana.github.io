@@ -11,9 +11,10 @@ export type PortfolioItemProps = {
 
 export type WindowProps = {
   id: string,
-  size: {
-    height: string,
-    width: string,
+  style?: {
+    height?: string,
+    width?: string,
+    [key: string]: string,
   },
   position?: {
     x: number,
@@ -37,12 +38,13 @@ export type TabProps = {
   close?: (self: any) => void,
 };
 
-export type ArtGalleryProps = {
-  openWindow: (imageSrc: string) => void,
-};
+export type ImageWindowProps = {
+  source: string,
+}
 
-export type ArtGalleryItemProps = {
-  imageSrc: string,
+export type FileWindowProps = {
+  openWindow: (src: string) => void,
+  source: string[],
 };
 
 export type TerminalProps = {

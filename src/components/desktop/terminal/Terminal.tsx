@@ -15,8 +15,10 @@ const COMMAND_NOT_FOUND = 'command not found';
 const directories = {
   root: {
     children: ['README.md', 'art', 'terminal.exe', 'projects', 'music.exe', 'virus.exe'],
-    hidden: ['secret_directory']
-  } 
+    hidden: ['secret_directory'],
+    ['projects']: {},
+    ['art']: {}
+  }
 };
 
 const prompts = ['root $ ', 'are you sure? '];
@@ -78,12 +80,14 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
   };
 
   virus = () => {
-    this.startLoadingAnimation();
+    this.startLoadingAnimation('installing virus.exe');
+    //this.startLoadingAnimation('downloading browser history');
+    //this.startLoadingAnimation('accessing camera');
   };
 
-  startLoadingAnimation = () => {
+  startLoadingAnimation = (message: string) => {
     this.setState((prev) => ({
-      history: [...prev.history, 'Installing virus.exe...'],
+      history: [...prev.history, `${message}...`],
       currentInput: '',
       isLoading: true,
       loadingProgress: 0,
@@ -94,7 +98,7 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
         const newProgress = Math.min(prev.loadingProgress + 5, 100);
         const newHistory = [...prev.history];
         newHistory[newHistory.length - 1] = 
-          `Installing virus.exe... [${'#'.repeat(newProgress / 5)}${' '.repeat(20 
+          `${message}... [${'#'.repeat(newProgress / 5)}${' '.repeat(20 
           - newProgress / 5)}] ${newProgress}%`;
 
         if (newProgress === 100) {
