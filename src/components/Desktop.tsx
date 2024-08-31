@@ -14,7 +14,7 @@ import {
 } from '../constants/init-windows.const';
 import { getTopTracks } from '../api/spotify';
 import about from './desktop/about/about.md';
-import { artSource } from './../constants/file-directories.const';
+import { drawingSource } from './../constants/file-directories.const';
 
 const tabDisplay = {
 	display: 'flex',
@@ -33,7 +33,7 @@ type DesktopState = {
   api_data: {
     top_tracks: any[]
   },
-  date: Date
+  date: Date,
 };
 
 const ICON_FOLDER = '/assets/images/icons/folder.png';
@@ -50,7 +50,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			api_data: {
         top_tracks: []
       },
-      date: new Date()
+      date: new Date(),
 		}
     this.applications = {};
 	}
@@ -66,9 +66,9 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
         ['README.md']: genericWindow('README.md', about),
         ['terminal.exe']: terminal({openWindow: this.openWindow}),
         ['music.exe']: musicPlayer(this.state.api_data),
-        ['art']: genericFileWindow('art', {
+        ['explorer']: genericFileWindow('explorer', {
           openWindow: this.openGalleryItem,
-          source: artSource,
+          source: drawingSource,
         }),
         ['projects']: portfolio(),
       };
@@ -207,9 +207,9 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 						<div className="icon-text">README.md</div>
 					</div>
 					<div className="icon" onClick={() => 
-            this.openWindow('art')}>
+            this.openWindow('explorer')}>
 						<img src={ICON_FOLDER}/>
-						<div className="icon-text">art</div>
+						<div className="icon-text">explorer</div>
 					</div>
 					<div className="icon" onClick={() => 
 						this.openWindow('terminal.exe')}>

@@ -1,4 +1,4 @@
-export const artSource = [
+export const drawingSource = [
   "/assets/images/art/IMG_1055[3575]_1.jpg",
   "/assets/images/art/IMG_1057[3579]_2.jpg",
   "/assets/images/art/IMG_1058[3581]_3.jpg",

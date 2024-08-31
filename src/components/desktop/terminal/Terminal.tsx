@@ -1,6 +1,7 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import { TerminalProps } from '../../../types/window-props';
-import { artSource } from '../../../constants/file-directories.const';
+import { drawingSource } from '../../../constants/file-directories.const';
+import { directoryTree, getSubTree } from '../../../utils/file-directory';
 import '../../../pages/Terminal.css';
 
 interface TerminalState {
@@ -14,42 +15,6 @@ interface TerminalState {
 }
 
 const COMMAND_NOT_FOUND = 'command not found';
-
-type DirectoryTree = Record<string, Node>;
-type Node = {
-  path: string,
-  children?: string[],
-  hidden?: string[],
-  parent: string,
-  subTree?: DirectoryTree,
-
-};
-
-const directoryTree: DirectoryTree = {
-  root: {
-    path: 'root',
-    children: ['README.md', 'art', 'terminal.exe', 'projects', 'music.exe', 'virus.exe'],
-    hidden: ['secret_directory'],
-    parent: 'root',
-    subTree: {
-      ['projects']: {
-        path: 'root/projects',
-        children: [],
-        parent: 'root'
-      },
-      ['art']: {
-        path: 'root/art',
-        children: artSource.map((str) => str.split('/').pop()),
-        parent: 'root'
-      },
-      ['secret_directory']: {
-        path: 'root/secret_directory',
-        children: ['actual_virus.exe'],
-        parent: 'root',
-      },
-    }
-  }
-};
 
 const prompts = ['$ ', 'are you sure? '];
 
@@ -104,33 +69,29 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
     return dirs.join('\t');
   };
 
-  cd = (newLocation: string) => {
+  cd = (route: string) => {
     this.setState(prev => {
-      const backward = newLocation === '..';
-      const route = backward ?
-        prev.directorySubTree.parent : newLocation;
+      let newRoute = route;
+      const backward = route === '..';
       const pathArr = prev.directorySubTree.path.split('/');
       if (backward) {
         pathArr.pop();
+        newRoute = pathArr[pathArr.length - 1]
       } else {
         pathArr.push(route);
       }
       return {
-        location: route, 
-        prompt: `${route} ${prompts[0]}`,
-        directorySubTree: this.getSubTree(pathArr, directoryTree['root'], 0),
+        location: newRoute, 
+        prompt: `${newRoute} ${prompts[0]}`,
+        directorySubTree: getSubTree(pathArr, directoryTree['root'], 0),
       }
     });
   };
 
-  getSubTree = (ids: string[], node: Node, index: number): Node => {
-    if (index === ids.length - 1 || ids.length == 0) {
-      return node;
-    };
-    index++;
-    const nextNode = node.subTree[ids[index]];
-    return this.getSubTree(ids, nextNode, index);
-  };
+  // convert route into valid path format string
+  getTargetPath = (route: string) => {
+    
+  }
 
   virus = () => {
     this.startLoadingAnimation('installing virus.exe');
