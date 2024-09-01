@@ -67,7 +67,7 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
         ['terminal.exe']: terminal({openWindow: this.openWindow}),
         ['music.exe']: musicPlayer(this.state.api_data),
         ['explorer']: genericFileWindow('explorer', {
-          openWindow: this.openGalleryItem,
+          openWindow: this.openWindow,
           source: drawingSource,
         }),
         ['projects']: portfolio(),
@@ -189,7 +189,12 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
   }
 
   openWindow = (key: string) => {
-   this.unminimize((this.applications[key]));
+    // window is either an exe, img, or md
+    if (this.applications[key]) {
+      this.unminimize((this.applications[key]));
+    } else if (/^.*\.jpg$/i.test(key)) { 
+      this.unminimize(genericImageWindow(key, {source: key}));
+    }
   }
 
 	render() {

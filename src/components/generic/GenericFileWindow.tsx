@@ -30,7 +30,7 @@ export default class GenericFileWindow extends Component<FileWindowProps, FileWi
 
   onSelectItem = (key: string) => {
     // if the selected item is a directory update the directory path
-    if (this.getCurrentSubTree()?.subTree !== undefined) {
+    if (this.getCurrentSubTree()?.subTree[key] !== undefined ) {
       this.setState(prev => {
         return {
           directoryPath: `${prev.directoryPath}/${key}`,
@@ -39,7 +39,7 @@ export default class GenericFileWindow extends Component<FileWindowProps, FileWi
     } else {
       this.props.openWindow(key);
     }
-  }
+  };
 
   render() {
     return (
@@ -53,7 +53,7 @@ export default class GenericFileWindow extends Component<FileWindowProps, FileWi
                 onTouchStart={() => this.onSelectItem(value)}>
                   <img src={ICON_FOLDER}/>
                 </div>
-              <div>{value}</div>
+              <div>{value.split('/').pop()}</div>
             </div>
           )
         })}
