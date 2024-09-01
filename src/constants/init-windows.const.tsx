@@ -101,7 +101,7 @@ export const terminal = (props: TerminalProps): WindowProps => {
 
 export const cube = (): WindowProps => {
   return {
-    id: 'cube.exe',
+    id: 'cube_rotate.exe',
     style: {
       height: '20rem',
       width: '20rem',

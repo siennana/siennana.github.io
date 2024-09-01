@@ -21,7 +21,7 @@ export const directoryTree: DirectoryTree = {
           },
           ['animation']: {
             path: 'root/art/animation',
-            children: [],
+            children: ['cube_rotate.exe'],
           },
         },
       },

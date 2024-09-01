@@ -70,10 +70,11 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
           openWindow: this.openWindow,
           source: drawingSource,
         }),
+        ['cube_rotate.exe']: cube(),
         ['projects']: portfolio(),
       };
       this.openWindow('README.md');
-      this.addToOpenStack(cube());
+      this.openWindow('cube_rotate.exe');
     });
 
     this.timer = setInterval(() => {

@@ -30,7 +30,8 @@ export default class GenericFileWindow extends Component<FileWindowProps, FileWi
 
   onSelectItem = (key: string) => {
     // if the selected item is a directory update the directory path
-    if (this.getCurrentSubTree()?.subTree[key] !== undefined ) {
+    if (this.getCurrentSubTree()?.subTree !== undefined &&
+        this.getCurrentSubTree().subTree[key] !== undefined) {
       this.setState(prev => {
         return {
           directoryPath: `${prev.directoryPath}/${key}`,
