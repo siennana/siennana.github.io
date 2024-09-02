@@ -38,8 +38,12 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
   };
 
   handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (e.key === 'Enter') {
       this.processCommand();
+    }
+    if (e.key === 'Tab') {
+      console.log('tabPressed');
     }
   };
 
@@ -157,7 +161,7 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
           if (/^.*\.exe$/i.test(command)) {
             try {
               this.props.openWindow(command)
-              return `opening ${command}`;
+              return `running ${command}...`;
             } catch {
               return `no application named ${command}`;
             }
