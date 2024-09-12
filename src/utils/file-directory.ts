@@ -1,3 +1,4 @@
+import { ComponentType, useState } from 'react';
 import { DirectoryTree, Node } from '../types/file-directory';
 import { drawingSource } from '../constants/file-directories.const';
 

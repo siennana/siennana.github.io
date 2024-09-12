@@ -1,7 +1,11 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import { TerminalProps } from '../../../types/window-props';
 import { drawingSource } from '../../../constants/file-directories.const';
-import { directoryTree, getSubTree } from '../../../utils/file-directory';
+import { 
+  directoryTree, 
+  getSubTree, 
+} from '../../../utils/file-directory';
+import { Node } from '../../../types/file-directory';
 import '../../../pages/Terminal.css';
 
 interface TerminalState {
@@ -11,7 +15,7 @@ interface TerminalState {
   prompt: string;
   isLoading: boolean;
   loadingProgress: number;
-  directorySubTree: any;
+  directorySubTree: Node;
 }
 
 const COMMAND_NOT_FOUND = 'command not found';
@@ -38,11 +42,12 @@ export default class Terminal extends Component<TerminalProps, TerminalState> {
   };
 
   handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
     if (e.key === 'Enter') {
       this.processCommand();
     }
+    // TODO not working
     if (e.key === 'Tab') {
+      e.preventDefault();
       console.log('tabPressed');
     }
   };
