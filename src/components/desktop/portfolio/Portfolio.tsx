@@ -15,12 +15,14 @@ type PortfolioProps = {};
 
 const getPortfolioItemsByTab = (items: PortfolioObject[]): Record<TabKey, PortfolioObject[]> => {
   let tabItems: Record<TabKey, PortfolioObject[]> = {
-    'personal': [],
-    'work': [],
+    'web': [],
+    'electronics': [],
+    'software': [],
     'resume': []
   };
-  tabItems['personal'] = items.filter(item => item.type === 'personal');
-  tabItems['work'] = items.filter(item => item.type === 'work');
+  tabItems['web'] = items.filter(item => item.type === 'web');
+  tabItems['electronics'] = items.filter(item => item.type === 'electronics');
+  tabItems['software'] = items.filter(item => item.type === 'software');
   return tabItems;
 };
 
@@ -28,7 +30,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioState>
   constructor(props: PortfolioProps) {
     super(props);
     this.state = {
-      selectedTab: 'personal',
+      selectedTab: 'resume',
       portfolioTabItems: getPortfolioItemsByTab(portfolioItems),
       resumeText: ''
     }
@@ -61,8 +63,9 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioState>
     return (
       <div className='projects-wrapper'>
         <div className='portfolio-tabs'>
-          <div className={this.isSelected('personal') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('personal')}>Personal</div>
-          <div className={this.isSelected('work') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('work')}>Work</div>
+          <div className={this.isSelected('web') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('web')}>Web</div>
+          <div className={this.isSelected('electronics') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('electronics')}>Electronics</div>
+          <div className={this.isSelected('software') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('software')}>Software</div>
           <div className={this.isSelected('resume') ? 'portfolio-tab selected-tab' : 'portfolio-tab'} onClick={() => this.changeTab('resume')}>Resume</div>
         </div>
         <div className='portfolio-content'>
