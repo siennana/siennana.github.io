@@ -5,9 +5,9 @@ import Terminal from "../components/desktop/terminal/Terminal";
 import GenericFileWindow from '../components/generic/GenericFileWindow';
 import GenericImgWindow from '../components/generic/GenericImgWindow';
 import Cube from "../components/threejs/Cube";
-import { 
-  WindowProps, 
-  MusicPlayerProps, 
+import {
+  WindowProps,
+  MusicPlayerProps,
   TerminalProps,
   FileWindowProps,
   ImageWindowProps,
@@ -15,17 +15,14 @@ import {
 import React from 'react';
 
 function genericProps<E> (
-  key: string, 
+  key: string,
   component: any,
   props: E,
-  overrides?: Partial<WindowProps>,
 ): WindowProps {
   return {
     id: key,
-    style: {
-      height: 'auto',
-      width: '20rem',
-    },
+    height: 'auto',
+    width: '20rem',
     content: React.createElement(component, props),
     displayName: key
   }
@@ -41,14 +38,12 @@ export const genericImageWindow = (key: string, props: ImageWindowProps): Window
 
 export const genericWindow = (key: string, mdSource?: string): WindowProps => {
   const defaultContent = <div>Coming Soon!</div>
-  const windowContent = 
+  const windowContent =
     mdSource ? <GenericComponent markdownSource={mdSource} /> : defaultContent;
   return {
     id: key,
-    style: {
-      height: 'auto',
-      width: '20rem',
-    },
+    height: 'auto',
+    width: '20rem',
     content: windowContent,
     displayName: key,
   }
@@ -57,15 +52,13 @@ export const genericWindow = (key: string, mdSource?: string): WindowProps => {
 export const portfolio = (props?: any): WindowProps => {
   return {
     id: 'projects',
-    style: {
-      height: '40rem',
-      width: '35rem',
-    },
+    height: '40rem',
+    width: '35rem',
     position: {
       x: 100,
       y: 100,
     },
-    zIndex: 'auto', 
+    zIndex: 'auto',
     content: <Portfolio {...props}/>,
     displayName: 'Projects',
   }
@@ -74,10 +67,8 @@ export const portfolio = (props?: any): WindowProps => {
 export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
   return {
     id: 'music.exe',
-    style: {
-      height: '25rem',
-      width: '35rem',
-    },
+    height: '25rem',
+    width: '35rem',
     position: {
       x: 150,
       y: 150,
@@ -90,10 +81,8 @@ export const musicPlayer = (props: MusicPlayerProps): WindowProps => {
 export const terminal = (props: TerminalProps): WindowProps => {
   return {
     id: 'terminal.exe',
-    style: {
-      height: '20rem',
-      width: '25rem',
-    },
+    height: '20rem',
+    width: '25rem',
     content: <Terminal {...props}/>,
     displayName: 'terminal.exe',
   }
@@ -102,11 +91,9 @@ export const terminal = (props: TerminalProps): WindowProps => {
 export const cube = (): WindowProps => {
   return {
     id: 'cube_rotate.exe',
-    style: {
-      height: '20rem',
-      width: '20rem',
-    },
-    position: {x: 340, y: 0},
+    height: '20rem',
+    width: '20rem',
+    position: {x: 350, y: 136},
     content: <Cube />,
     displayName: 'cube.exe',
   }

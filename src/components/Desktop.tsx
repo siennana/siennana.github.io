@@ -145,8 +145,8 @@ export default class Desktop extends Component<DesktopProps, DesktopState> {
 			...app,
 			close: () => this.removeFromOpenStack(app.id),
 			minimize: () => this.minimize(app),
-      unminimize: () => this.unminimize(app),
-      bringWindowToFront: () => this.updateZStack(app.id),
+			unminimize: () => this.unminimize(app),
+			bringWindowToFront: () => this.updateZStack(app.id),
 		};
 		this.setState(prevState => ({
       window_stack: [...prevState.window_stack, item],

@@ -11,11 +11,8 @@ export type PortfolioItemProps = {
 
 export type WindowProps = {
   id: string,
-  style?: {
-    height?: string,
-    width?: string,
-    [key: string]: string,
-  },
+  width?: string | number,
+  height?: string | number,
   position?: {
     x: number,
     y: number,
