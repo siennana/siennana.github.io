@@ -1,6 +1,6 @@
 ## Hello
 
-![siennacodes](./public/assets/images/preview.png)
+![siennacodes](./public/assets/images/preview-2.png)
 
 Thanks for checking out my portfolio. The website was designed using React and Typescript.
 It's designed to look like a desktop. Using the icons you'll find:
