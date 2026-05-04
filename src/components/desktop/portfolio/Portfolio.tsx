@@ -48,7 +48,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioState>
     if (this.state.selectedTab === 'resume') {
       return (
         <div>
-          <a className='resume-link' href='./assets/PDFs/resume_4_18_22.pdf' target='_blank'>Check out my Resume</a>
+          <a className='resume-link' href='./assets/PDFs/resume_4_7_26.pdf' target='_blank'>Check out my Resume</a>
           <ReactMarkdown>{this.state.resumeText}</ReactMarkdown>
         </div>
       );
